@@ -23,7 +23,7 @@ public class Translator extends Object
 	* HTMLに由来するテーブルを記憶するフィールド。
 	*/
 	private Table outputTable;
-	
+
 	/**
 	* 属性リストのクラスを指定したトランスレータのコンストラクタ。
 	* @param classOfAttributes 属性リストのクラス
@@ -163,6 +163,38 @@ public class Translator extends Object
 	{
 		Reader aReader = new Reader(this.inputTable);
 		aReader.perform();
+		List<String> aList1 = new ArrayList<>();
+		byte b1 = 0;
+		for (String str : this.inputTable.attributes().names()) {
+			if (b1 != this.inputTable.attributes().indexOfThumbnail()) {
+				aList1.add(str);
+				if (b1 == this.inputTable.attributes().indexOfPeriod())
+				aList1.add("在位日数");
+			}
+			b1++;
+		}
+		this.outputTable.attributes().names(aList1);
+
+		byte b2 = 0;
+		for (Tuple tuple1 : this.inputTable.tuples()) {
+			List<String> aList2 = new ArrayList<>();
+			b1 = 0;
+			for (String str : tuple1.values()) {
+				if (b1 != this.inputTable.attributes().indexOfThumbnail()) {
+					if (b1 == this.inputTable.attributes().indexOfImage()) {
+						aList2.add(computeStringOfImage(str, tuple1, b2));
+					} else {
+						aList2.add(str);
+					}
+					if (b1 == this.inputTable.attributes().indexOfPeriod())
+					aList2.add(computeNumberOfDays(str));
+				}
+				b1++;
+			}
+			Tuple tuple2 = new Tuple(this.outputTable.attributes(), aList2);
+			this.outputTable.add(tuple2);
+			b2++;
+		}
 
 		return;
 	}
