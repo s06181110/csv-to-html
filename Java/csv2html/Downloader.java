@@ -6,14 +6,14 @@ import java.util.List;
 import utility.ImageUtility;
 
 /**
- * ダウンローダ：CSVファイル・画像ファイル・サムネイル画像ファイルをダウンロードする。
- */
+* ダウンローダ：CSVファイル・画像ファイル・サムネイル画像ファイルをダウンロードする。
+*/
 public class Downloader extends IO
 {
 	/**
-	 * ダウンローダのコンストラクタ。
-	 * @param aTable テーブル
-	 */
+	* ダウンローダのコンストラクタ。
+	* @param aTable テーブル
+	*/
 	public Downloader(Table aTable)
 	{
 		super(aTable);
@@ -22,8 +22,8 @@ public class Downloader extends IO
 	}
 
 	/**
-	 * 総理大臣の情報を記したCSVファイルをダウンロードする。
-	 */
+	* 総理大臣の情報を記したCSVファイルをダウンロードする。
+	*/
 	public void downloadCSV()
 	{
 
@@ -31,8 +31,8 @@ public class Downloader extends IO
 	}
 
 	/**
-	 * 総理大臣の画像群をダウンロードする。
-	 */
+	* 総理大臣の画像群をダウンロードする。
+	*/
 	public void downloadImages()
 	{
 		int indexOfImage = this.attributes().indexOfImage();
@@ -42,17 +42,17 @@ public class Downloader extends IO
 	}
 
 	/**
-	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする。
-	 * @param indexOfPicture 画像のインデックス
-	 */
+	* 総理大臣の画像群またはサムネイル画像群をダウンロードする。
+	* @param indexOfPicture 画像のインデックス
+	*/
 	private void downloadPictures(int indexOfPicture)
 	{
 		return;
 	}
 
 	/**
-	 * 総理大臣の画像群をダウンロードする。
-	 */
+	* 総理大臣の画像群をダウンロードする。
+	*/
 	public void downloadThumbnails()
 	{
 		int indexOfThumbnail = this.attributes().indexOfThumbnail();
@@ -62,8 +62,8 @@ public class Downloader extends IO
 	}
 
 	/**
-	 * 総理大臣の情報を記したCSVファイルをダウンロードして、画像群やサムネイル画像群もダウロードする。
-	 */
+	* 総理大臣の情報を記したCSVファイルをダウンロードして、画像群やサムネイル画像群もダウロードする。
+	*/
 	public void perform()
 	{
 		return;
