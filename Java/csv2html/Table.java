@@ -106,14 +106,15 @@ public class Table extends Object
 	private BufferedImage picture(String aString)
 	{
 		List<String> aList = IO.splitString(aString,"/");
-		StringBuffer stringBuffer = new StringBuffer();
-		for(String str: aList)
-		{
-			stringBuffer.append(File.separator);
-			stringBuffer.append(str);
-		}
-		String aImagePath = stringBuffer.toString();
+		// StringBuffer stringBuffer = new StringBuffer();
+		// for(String str: aList)
+		// {
+		// 	stringBuffer.append(File.separator);
+		// 	stringBuffer.append(str);
+		// }
+		String aImagePath = this.attributes.baseDirectory() + aList.get(0) + File.separator + aList.get(1);
 		File aFile = new File(aImagePath);
+		System.out.println(aImagePath);
 		BufferedImage bufferedImage = null;
 		try
 		{
