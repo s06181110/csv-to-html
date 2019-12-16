@@ -25,7 +25,20 @@ public class Reader extends IO
 	 */
 	public void perform()
 	{
-		
+		Table aTable = this.table();
+		List<String> aList = IO.readTextFromURL(aTable.attributes().csvUrl());
+		Boolean aBoolean = true;
+		for(String aString : aList){
+			List<String> anotherList =  IO.splitString(aString, ",\n");
+			if(aBoolean) {
+				aTable.attributes().names(anotherList);
+				aBoolean = false;
+				continue;
+			}
+			Tuple aTuple = new Tuple(aTable.attributes(), anotherList);
+			aTable.add(aTuple);
+		}
+
 		return;
 	}
 }

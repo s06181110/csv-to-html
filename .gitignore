@@ -1,5 +1,12 @@
+# macのアレ
 .DS_Store
+
+# みんなのエディタで生成される設定ファイルを除外
 .vscode
 .idea
 .atom
 .metadata
+
+# 実行時に生成されるファイルを除外
+Classes
+csv2html.jar
