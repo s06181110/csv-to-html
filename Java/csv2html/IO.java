@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import utility.StringUtility;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * 入出力：リーダ・ダウンローダ・ライタを抽象する。
  */
@@ -64,7 +66,14 @@ public abstract class IO extends Object
 	 */
 	public static String htmlCanonicalString(String aString)
 	{
-		return null;
+		try {
+			byte[] buff = aString.getBytes("UTF-8");    
+			aString =  new String(buff, "UTF-8");
+		} catch (UnsupportedEncodingException unsupportedEncodingException){
+			unsupportedEncodingException.printStackTrace();
+		}
+		return aString;
+
 	}
 
 	/**
