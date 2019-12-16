@@ -23,7 +23,7 @@ public class Translator extends Object
 	* HTMLに由来するテーブルを記憶するフィールド。
 	*/
 	private Table outputTable;
-	
+
 	/**
 	* 属性リストのクラスを指定したトランスレータのコンストラクタ。
 	* @param classOfAttributes 属性リストのクラス
