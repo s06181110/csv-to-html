@@ -27,7 +27,6 @@ class Translator(object):
 
 		self._input_table = Table('input', classOfAttributes)
 		self._output_table = Table('output', classOfAttributes)
-
 		return
 
 	def compute_string_of_days(self, period):
@@ -41,8 +40,28 @@ class Translator(object):
 
 	def compute_string_of_image(self, tuple):
 		"""サムネイル画像から画像へ飛ぶためのHTML文字列を作成して、それを応答する。"""
-
-		return None
+		vn = self.values[self.attributes().keys['no']]
+		vt = self.values[self.attributes().keys['thumbnail']]
+		vi = self.values[self.attributes().keys["image"]]
+		width, height = self._input_table.thumbnail_filenames[vt].size
+		an_alt = []
+		an_alt.append(vt.split('/'))
+		current = len(an_alt) - 1
+		html_str = '<a name=\"'\
+					vn\
+					'\" href=\"'\
+					vi\
+					'\">'\
+					'<img class=\"borderless\" src=\"'\
+					vt\
+					'\" width=\"'\
+					width\
+					'\" height=\"'\
+					height\
+					'\" alt=\"'\
+					an_alt[current]\
+					'\"></a>'
+		return html_str
 
 	def execute(self):
 		"""CSVファイルをHTMLページへと変換する。"""
