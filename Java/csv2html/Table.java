@@ -161,7 +161,6 @@ public class Table extends Object
 			aBuffer.append(aTuple);
 		});
 		aBuffer.append("]");
-
 		return aBuffer.toString();
 	}
 
