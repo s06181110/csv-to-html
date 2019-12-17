@@ -19,13 +19,13 @@ class Reader(IO):
 	def perform(self):
 		"""ダウンロードしたCSVファイルを読み込む。""" 
 		first = True
-		filename = os.path.join(self.attributes().base_directory(), csv_url.split('/')[-1])
+		filename = os.path.join(self.attributes().base_directory(), self.attributes().csv_url().split('/')[-1])
 		with open(filename, 'r') as a_file:
 			for a_line in a_file:
-				a_string = a_line.split()[0]
+				a_string = a_line
 				if first :
-					Table(attributes.names, a_line)
 					first = False
-				Tuple(aTable.attributes, a_line)
-				Table.add(a_tuple)
+					continue
+				a_tuple = Tuple(self.attributes(), a_line)
+				self.table().add(a_tuple)
 		return
