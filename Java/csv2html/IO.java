@@ -2,7 +2,6 @@ package csv2html;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,8 +51,8 @@ public abstract class IO extends Object
 		if (aFile.isFile()) { aFile.delete(); }
 		if (aFile.isDirectory())
 		{
-			List<File> Files = Arrays.asList(aFile.listFiles());
-			Files.forEach(IO::deleteFileOrDirectory);
+			File[] files = aFile.listFiles();
+			for (File each : files) { IO.deleteFileOrDirectory(each); }
 			aFile.delete();
 		}
 

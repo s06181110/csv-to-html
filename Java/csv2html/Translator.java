@@ -58,54 +58,54 @@ public class Translator extends Object
 	{
 		List<String> aList = IO.splitString(periodString, "年月日〜");
 		Calendar aCalendar = Calendar.getInstance();
-		Integer livedYear = Integer.valueOf(aList.get(0)).intValue();
-		Integer livedMonth = Integer.valueOf(aList.get(1)).intValue() - 1;
-		Integer livedDay = Integer.valueOf(aList.get(2)).intValue();
-		aCalendar.set(livedYear, livedMonth, livedDay);
-		Long bornedDate = aCalendar.getTime().getTime();
+		int i = Integer.valueOf(aList.get(0)).intValue();
+		int j = Integer.valueOf(aList.get(1)).intValue() - 1;
+		int k = Integer.valueOf(aList.get(2)).intValue();
+		aCalendar.set(i, j, k);
+		long l1 = aCalendar.getTime().getTime();
 
 		aCalendar = Calendar.getInstance();
 		if (aList.size() > 3) {
-			livedYear = Integer.valueOf(aList.get(3)).intValue();
-			livedMonth = Integer.valueOf(aList.get(4)).intValue() - 1;
-			livedDay = Integer.valueOf(aList.get(5)).intValue();
-			aCalendar.set(livedYear, livedMonth, livedDay);
+			i = Integer.valueOf(aList.get(3)).intValue();
+			j = Integer.valueOf(aList.get(4)).intValue() - 1;
+			k = Integer.valueOf(aList.get(5)).intValue();
+			aCalendar.set(i, j, k);
 		}
-		Long deadDate = aCalendar.getTime().getTime();
-		Long livedDate = (deadDate - bornedDate) / 86400000L + 1L;
+		long l2 = aCalendar.getTime().getTime();
+		long l3 = (l2 - l1) / 86400000L + 1L;
 
-		return String.format("%1$,d", new Object[] { Long.valueOf(livedDate) });
+		return String.format("%1$,d", new Object[] { Long.valueOf(l3) });
 	}
 
 	/**
 	* サムネイル画像から画像へ飛ぶためのHTML文字列を作成して、それを応答する。
 	* @param aString 画像の文字列
 	* @param aTuple タプル
-	* @param aNumber 番号
+	* @param no 番号
 	* @return サムネイル画像から画像へ飛ぶためのHTML文字列
 	*/
-	public String computeStringOfImage(String aString, Tuple aTuple, int aNumber)
+	public String computeStringOfImage(String aString, Tuple aTuple, int no)
 	{
-		String aImageName = aTuple.values().get(aTuple.attributes().indexOfNo());
-		String aImagePath = aTuple.values().get(aTuple.attributes().indexOfThumbnail());
-		BufferedImage bufferedImage = this.inputTable.thumbnails().get(aNumber);
-		Integer imagePathIndex = aTuple.attributes().indexOfThumbnail();
-		List<String> aList = IO.splitString(aTuple.values().get(imagePathIndex), "/");
-		imagePathIndex = aList.size() - 1;
+		String str1 = aTuple.values().get(aTuple.attributes().indexOfNo());
+		String str2 = aTuple.values().get(aTuple.attributes().indexOfThumbnail());
+		BufferedImage bufferedImage = this.inputTable.thumbnails().get(no);
+		int i = aTuple.attributes().indexOfThumbnail();
+		List<String> aList = IO.splitString(aTuple.values().get(i), "/");
+		i = aList.size() - 1;
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append("<a name=\"");
-		stringBuffer.append(aImageName);
+		stringBuffer.append(str1);
 		stringBuffer.append("\" href=\"");
 		stringBuffer.append(aString);
 		stringBuffer.append("\">");
 		stringBuffer.append("<img class=\"borderless\" src=\"");
-		stringBuffer.append(aImagePath);
+		stringBuffer.append(str2);
 		stringBuffer.append("\" width=\"");
 		stringBuffer.append(bufferedImage.getWidth());
 		stringBuffer.append("\" height=\"");
 		stringBuffer.append(bufferedImage.getHeight());
 		stringBuffer.append("\" alt=\"");
-		stringBuffer.append(aList.get(imagePathIndex));
+		stringBuffer.append(aList.get(i));
 		stringBuffer.append("\"></a>");
 
 		return stringBuffer.toString();
@@ -163,39 +163,42 @@ public class Translator extends Object
 	{
 		List<String> aList1 = new ArrayList<>();
 		byte b1 = 0;
+<<<<<<< HEAD
 		Reader aReader = new Reader(this.inputTable);
 		aReader.perform();
 		List<String> aList = new ArrayList<>();
 		Byte aByte = 0;
+=======
+>>>>>>> 3b98afcd24055d3f2899ee4af380da09bf384b9d
 		for (String str : this.inputTable.attributes().names()) {
-			if (aByte != this.inputTable.attributes().indexOfThumbnail()) {
-				aList.add(str);
-				if (aByte == this.inputTable.attributes().indexOfPeriod())
-				aList.add("在位日数");
+			if (b1 != this.inputTable.attributes().indexOfThumbnail()) {
+				aList1.add(str);
+				if (b1 == this.inputTable.attributes().indexOfPeriod())
+				aList1.add("在位日数");
 			}
-			aByte++;
+			b1++;
 		}
-		this.outputTable.attributes().names(aList);
+		this.outputTable.attributes().names(aList1);
 
-		byte anotherByte = 0;
-		for (Tuple aTuple : this.inputTable.tuples()) {
-			List<String> anotherList = new ArrayList<>();
-			aByte = 0;
-			for (String aString : aTuple.values()) {
-				if (aByte != this.inputTable.attributes().indexOfThumbnail()) {
-					if (aByte == this.inputTable.attributes().indexOfImage()) {
-						anotherList.add(computeStringOfImage(aString, aTuple, anotherByte));
+		byte b2 = 0;
+		for (Tuple tuple1 : this.inputTable.tuples()) {
+			List<String> aList2 = new ArrayList<>();
+			b1 = 0;
+			for (String str : tuple1.values()) {
+				if (b1 != this.inputTable.attributes().indexOfThumbnail()) {
+					if (b1 == this.inputTable.attributes().indexOfImage()) {
+						aList2.add(computeStringOfImage(str, tuple1, b2));
 					} else {
-						anotherList.add(aString);
+						aList2.add(str);
 					}
-					if (aByte == this.inputTable.attributes().indexOfPeriod())
-					anotherList.add(computeNumberOfDays(aString));
+					if (b1 == this.inputTable.attributes().indexOfPeriod())
+					aList2.add(computeNumberOfDays(str));
 				}
-				aByte++;
+				b1++;
 			}
-			Tuple anotherTuple = new Tuple(this.outputTable.attributes(), anotherList);
-			this.outputTable.add(anotherTuple);
-			anotherByte++;
+			Tuple tuple2 = new Tuple(this.outputTable.attributes(), aList2);
+			this.outputTable.add(tuple2);
+			b2++;
 		}
 
 		return;
