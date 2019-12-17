@@ -34,8 +34,10 @@ class Translator(object):
 		"""在位日数を計算して、それを文字列にして応答する。"""
 		a_list = []
 		a_list.append(period.split('[年, 月, 日, 〜]'))
-		print(a_list)
-		return None
+		st_date = datetime.date(a_list[0], a_list[1], a_list[2])
+		fin _date = datetime.date(a_list[3], a_list[4], a_list[5])
+		lon = fin_date - st_date
+		return lon
 
 	def compute_string_of_image(self, tuple):
 		"""サムネイル画像から画像へ飛ぶためのHTML文字列を作成して、それを応答する。"""
