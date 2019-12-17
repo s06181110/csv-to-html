@@ -93,7 +93,7 @@ public class Table extends Object
 			BufferedImage anImage = this.picture(aString);
 			this.images.add(anImage);
 		});
-		
+
 		return this.images;
 	}
 

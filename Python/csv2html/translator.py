@@ -36,7 +36,6 @@ class Translator(object):
 		a_list.append(period.split('[年, 月, 日, 〜]'))
 		print(a_list)
 		return None
-	compute_string_of_days('1603年2月12日〜1605年4月16日')
 
 	def compute_string_of_image(self, tuple):
 		"""サムネイル画像から画像へ飛ぶためのHTML文字列を作成して、それを応答する。"""
@@ -48,8 +47,7 @@ class Translator(object):
 
 		# ダウンローダに必要なファイル群をすべてダウンロードしてもらい、
 		# 入力となるテーブルを獲得する。
-		a_downloader = 
-		(self._input_table)
+		a_downloader = Downloader(self._input_table)
 		a_downloader.perform()
 
 		# トランスレータに入力となるテーブルを渡して変換してもらい、
