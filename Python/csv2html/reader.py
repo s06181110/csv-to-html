@@ -20,12 +20,11 @@ class Reader(IO):
 		"""ダウンロードしたCSVファイルを読み込む。""" 
 		first = True
 		filename = os.path.join(self.attributes().base_directory(), self.attributes().csv_url().split('/')[-1])
-		with open(filename, 'r') as a_file:
-			for a_line in a_file:
-				a_string = a_line
-				if first :
-					first = False
-					continue
-				a_tuple = Tuple(self.attributes(), a_line)
-				self.table().add(a_tuple)
+		for a_line in self.read_csv(filename):
+			if first :
+				self.attributes()._names = a_line
+				first = False
+				continue
+			a_tuple = Tuple(self.attributes(), a_line.split(','))
+			self.table().add(a_tuple)
 		return

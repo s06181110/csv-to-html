@@ -40,13 +40,15 @@ class Translator(object):
 
 	def compute_string_of_image(self, tuple):
 		"""サムネイル画像から画像へ飛ぶためのHTML文字列を作成して、それを応答する。"""
-		vn = self.values[self.attributes().keys['no']]
-		vt = self.values[self.attributes().keys['thumbnail']]
-		vi = self.values[self.attributes().keys["image"]]
+		vn = self.values[self.attributes().keys.index('no')]
+		vt = self.values[self.attributes().keys.index('thumbnail')]
+		vi = self.values[self.attributes().keys.index("image")]
 		width, height = self._input_table.thumbnail_filenames[vt].size
 		an_alt = []
 		an_alt.append(vt.split('/'))
 		current = len(an_alt) - 1
+
+		"""HTMLの文字列を生成"""
 		html_str = '<a name=\"'\
 					vn\
 					'\" href=\"'\
@@ -104,5 +106,17 @@ class Translator(object):
 
 	def translate(self):
 		"""CSVファイルを基にしたテーブルから、HTMLページを基にするテーブルに変換する。"""
+		Reader.perform()
+		roop1 = 0
+		header = []
+		for a_string in self._input_table.attributes().names:
+			if roop1 != self._input_table.attributes().keys.index('thumbnail'):
+				header.append(a_string)
+				if roop1 == self._input_table.attributes().keys.index("period"):
+					header.append("在位日数")
+		self._output_table.attributes()._names(header)
+
+		roop2 = 0
+		for
 
 		return
