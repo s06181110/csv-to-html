@@ -32,11 +32,11 @@ class Translator(object):
 
 	def compute_string_of_days(self, period):
 		"""在位日数を計算して、それを文字列にして応答する。"""
-		a_list = []
-		a_list.append(period.split('[年, 月, 日, 〜]'))
-		print(a_list)
-		return None
-	compute_string_of_days('1603年2月12日〜1605年4月16日')
+		time_list = map(int, period.split('[年, 月, 日, 〜]'))
+		start_datetime = datetime(time_list[:3])
+		dt_now = datetime.datetime.now()
+		end_datetime = datetime(time_list[3:]) if time_list.len() > 3 else datetime(dt_now.year, dt_now.month, dt_now.day)
+		return str(end_datetime - start_datetime)
 
 	def compute_string_of_image(self, tuple):
 		"""サムネイル画像から画像へ飛ぶためのHTML文字列を作成して、それを応答する。"""
@@ -48,8 +48,7 @@ class Translator(object):
 
 		# ダウンローダに必要なファイル群をすべてダウンロードしてもらい、
 		# 入力となるテーブルを獲得する。
-		a_downloader = 
-		(self._input_table)
+		a_downloader = (self._input_table)
 		a_downloader.perform()
 
 		# トランスレータに入力となるテーブルを渡して変換してもらい、
@@ -85,5 +84,4 @@ class Translator(object):
 
 	def translate(self):
 		"""CSVファイルを基にしたテーブルから、HTMLページを基にするテーブルに変換する。"""
-
 		return
