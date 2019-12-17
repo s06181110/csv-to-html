@@ -22,14 +22,20 @@ class IO(object):
 
 	def read_csv(self, filename):
 		"""指定されたファイルをCSVとして読み込み、行リストを応答する。"""
+		rows = []
+		with open(filename, 'r', encoding='utf-8') as a_file:
+			reader = csv.reader(a_file, delimiter=' ', quotechar='|')
+			for row in reader:
+				rows.append(row)
 
-		return None
+		return rows
 
 	@classmethod
 	def html_canonical_string(the_class, a_string):
 		"""指定された文字列をHTML内に記述できる正式な文字列に変換して応答する。"""
-
-		return None
+		byteCode = a_string.encode('utf-8')
+		a_string = byteCode.decode('utf-8')
+		return a_string
 
 	def table(self):
 		"""テーブルを応答する。"""
@@ -43,5 +49,9 @@ class IO(object):
 
 	def write_csv(self, filename, rows):
 		"""指定されたファイルにCSVとして行たち(rows)を書き出す。"""
+		with open(filename, 'w', encoding='utf-8') as a_file:
+			writer = csv.writer(a_file, delimiter=' ', quotechar='|')
+			for row in rows:
+				writer.writerow(row)
 
-		return
+		return self.filename
