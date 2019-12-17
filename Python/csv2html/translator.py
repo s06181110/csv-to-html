@@ -114,9 +114,24 @@ class Translator(object):
 				header.append(a_string)
 				if roop1 == self._input_table.attributes().keys.index("period"):
 					header.append("在位日数")
+			roop1+=1
 		self._output_table.attributes()._names(header)
 
 		roop2 = 0
-		for
+		for　a_tuple in self._input_table.values():
+			elements = []
+			roop3 = 0
+			for another_string in a_tuple.values():
+				if roop3 == self._input_table.attributes().keys.index("thumbnail"):
+					if roop3 == self._input_table.attributes().keys.index("image"):
+						elements.append(compute_string_of_image(a_tuple))
+					else:
+						elements.append(another_string)
+					if roop3 == self._input_table.attributes().keys.index("period"):
+						elements.append(compute_string_of_days(another_string))
+				roop3+=1
+			another_tuple = Tuple(self._output_table.attributes(), elements)
+			self._output_table.append(another_tuple)
+			roop2+=1
 
 		return
