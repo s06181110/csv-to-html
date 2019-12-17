@@ -3,25 +3,25 @@ package csv2html;
 import java.util.List;
 
 /**
-* タプル：情報テーブルの中の各々のレコード。
-*/
+ * タプル：情報テーブルの中の各々のレコード。
+ */
 public class Tuple extends Object
 {
 	/**
-	* 属性リストを記憶するフィールド。
-	*/
+	 * 属性リストを記憶するフィールド。
+	 */
 	private Attributes attributes;
 
 	/**
-	* 値リストを記憶するフィールド。
-	*/
+	 * 値リストを記憶するフィールド。
+	 */
 	private List<String> values;
 
 	/**
-	* 属性リストと値リストからタプルを作るコンストラクタ。
-	* @param instanceOfAttributes 属性リスト
-	* @param valueCollection 値リスト
-	*/
+	 * 属性リストと値リストからタプルを作るコンストラクタ。
+	 * @param instanceOfAttributes 属性リスト
+	 * @param valueCollection 値リスト
+	 */
 	public Tuple(Attributes instanceOfAttributes, List<String> valueCollection)
 	{
 		super();
@@ -33,25 +33,25 @@ public class Tuple extends Object
 	}
 
 	/**
-	* 属性リストを応答する。
-	* @return 属性リスト
-	*/
+	 * 属性リストを応答する。
+	 * @return 属性リスト
+	 */
 	public Attributes attributes()
 	{
 		return this.attributes;
 	}
 
 	/**
-	* 自分自身を文字列にして、それを応答する。
-	* @return 自分自身の文字列
-	*/
+	 * 自分自身を文字列にして、それを応答する。
+	 * @return 自分自身の文字列
+	 */
 	public String toString()
 	{
 		StringBuffer aBuffer = new StringBuffer();
 		Class<?> aClass = this.getClass();
 		aBuffer.append(aClass.getName());
 		aBuffer.append("[");
-		int index = 0;
+		Integer index = 0;
 		for (String aString : this.values())
 		{
 			if (index != 0) { aBuffer.append(","); }
@@ -65,9 +65,9 @@ public class Tuple extends Object
 	}
 
 	/**
-	* 値リストを応答する。
-	* @return 値リスト
-	*/
+	 * 値リストを応答する。
+	 * @return 値リスト
+	 */
 	public List<String> values()
 	{
 		return this.values;

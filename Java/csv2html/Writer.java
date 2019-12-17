@@ -11,14 +11,14 @@ import java.util.Calendar;
 import utility.StringUtility;
 
 /**
-* ライタ：情報のテーブルをHTMLページとして書き出す。
-*/
+ * ライタ：情報のテーブルをHTMLページとして書き出す。
+ */
 public class Writer extends IO
 {
 	/**
-	* ライタのコンストラクタ。
-	* @param aTable テーブル
-	*/
+	 * ライタのコンストラクタ。
+	 * @param aTable テーブル
+	 */
 	public Writer(Table aTable)
 	{
 		super(aTable);
@@ -27,8 +27,8 @@ public class Writer extends IO
 	}
 
 	/**
-	* HTMLページを基にするテーブルからインデックスファイル(index.html)に書き出す。
-	*/
+	 * HTMLページを基にするテーブルからインデックスファイル(index.html)に書き出す。
+	 */
 	public void perform()
 	{
 		try
@@ -53,18 +53,18 @@ public class Writer extends IO
 	}
 
 	/**
-	* 属性リストを書き出す。
-	* @param aWriter ライタ
-	*/
+	 * 属性リストを書き出す。
+	 * @param aWriter ライタ
+	 */
 	public void writeAttributesOn(BufferedWriter aWriter)
 	{
 		try {
 			aWriter.write("\t\t\t\t\t\t");
 			aWriter.write("<tr>\n");
-			for (String str : attributes().names()) {
+			for (String aString : attributes().names()) {
 				aWriter.write("\t\t\t\t\t\t\t");
 				aWriter.write("<td class=\"center-pink\"><strong>");
-				aWriter.write(str);
+				aWriter.write(aString);
 				aWriter.write("</strong></td>\n");
 			}
 			aWriter.write("\t\t\t\t\t\t");
@@ -76,38 +76,38 @@ public class Writer extends IO
 	}
 
 	/**
-	* フッタを書き出す。
-	* @param aWriter ライタ
-	*/
+	 * フッタを書き出す。
+	 * @param aWriter ライタ
+	 */
 	public void writeFooterOn(BufferedWriter aWriter)
 	{
 		Class<?> clazz = getClass();
-		String str1 = clazz.getName();
+		String className = clazz.getName();
 		Calendar calendar = Calendar.getInstance();
-		int i = calendar.get(1);
-		int j = calendar.get(2) + 1;
-		int k = calendar.get(5);
-		int m = calendar.get(11);
-		int n = calendar.get(12);
-		int i1 = calendar.get(13);
+		int year = calendar.get(1);
+		int month = calendar.get(2) + 1;
+		int day = calendar.get(5);
+		int hour = calendar.get(11);
+		int minute = calendar.get(12);
+		int second = calendar.get(13);
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(" on ");
-		stringBuffer.append(String.format("%1$04d", new Object[] { Integer.valueOf(i) }));
+		stringBuffer.append(String.format("%1$04d", new Object[] { Integer.valueOf(year) }));
 		stringBuffer.append("/");
-		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(j) }));
+		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(month) }));
 		stringBuffer.append("/");
-		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(k) }));
-		String str2 = stringBuffer.toString();
+		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(day) }));
+		String aDate = stringBuffer.toString();
 		stringBuffer = new StringBuffer();
 		stringBuffer.append(" at ");
-		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(m) }));
+		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(hour) }));
 		stringBuffer.append(":");
-		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(n) }));
+		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(minute) }));
 		stringBuffer.append(":");
-		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(i1) }));
-		String str3 = stringBuffer.toString();
+		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(second) }));
+		String aTime = stringBuffer.toString();
 		try {
-			aWriter.write("\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</td>\n\t\t</tr>\n\t</tbody>\n</table>\n<hr>\n<div class=\"right-small\">Created by " + str1 + str2 + str3 + "</div>\n</body>\n</html>\n");
+			aWriter.write("\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</td>\n\t\t</tr>\n\t</tbody>\n</table>\n<hr>\n<div class=\"right-small\">Created by " + className + aDate + aTime + "</div>\n</body>\n</html>\n");
 		} catch (IOException iOException) {
 			iOException.printStackTrace();
 		}
@@ -115,9 +115,9 @@ public class Writer extends IO
 	}
 
 	/**
-	* ヘッダを書き出す。
-	* @param aWriter ライタ
-	*/
+	 * ヘッダを書き出す。
+	 * @param aWriter ライタ
+	 */
 	public void writeHeaderOn(BufferedWriter aWriter)
 	{
 		try {
@@ -147,23 +147,23 @@ public class Writer extends IO
 	public void writeTuplesOn(BufferedWriter aWriter)
 	{
 		try {
-			byte b = 0;
-			for (Tuple tuple : super.tuples()) {
+			byte aByte = 0;
+			for (Tuple aTuple : super.tuples()) {
 				aWriter.write("\t\t\t\t\t\t");
 				aWriter.write("<tr>\n");
-				for (String str : tuple.values()) {
+				for (String aString : aTuple.values()) {
 					aWriter.write("\t\t\t\t\t\t\t");
-					if (b % 2 == 0) {
+					if (aByte % 2 == 0) {
 						aWriter.write("<td class=\"center-blue\">");
 					} else {
 						aWriter.write("<td class=\"center-yellow\">");
 					}
-					aWriter.write(str);
+					aWriter.write(aString);
 					aWriter.write("</td>\n");
 				}
 				aWriter.write("\t\t\t\t\t\t");
 				aWriter.write("</tr>\n");
-				b++;
+				aByte++;
 			}
 		}
 		catch (IOException iOException) { iOException.printStackTrace(); }
