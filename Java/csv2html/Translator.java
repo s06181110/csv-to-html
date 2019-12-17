@@ -63,7 +63,7 @@ public class Translator extends Object
 		Integer livedDay = Integer.valueOf(aList.get(2)).intValue();
 		aCalendar.set(livedYear, livedMonth, livedDay);
 		Long bornedDate = aCalendar.getTime().getTime();
-		
+
 		aCalendar = Calendar.getInstance();
 		if (aList.size() > 3) {
 			livedYear = Integer.valueOf(aList.get(3)).intValue();
