@@ -27,50 +27,29 @@ class Translator(object):
 
 		self._input_table = Table('input', classOfAttributes)
 		self._output_table = Table('output', classOfAttributes)
+
 		return
 
 	def compute_string_of_days(self, period):
 		"""在位日数を計算して、それを文字列にして応答する。"""
 		a_list = []
 		a_list.append(period.split('[年, 月, 日, 〜]'))
-		st_date = datetime.date(a_list[0], a_list[1], a_list[2])
-		fin _date = datetime.date(a_list[3], a_list[4], a_list[5])
-		lon = fin_date - st_date
-		return lon
+		print(a_list)
+		return None
+	compute_string_of_days('1603年2月12日〜1605年4月16日')
 
 	def compute_string_of_image(self, tuple):
 		"""サムネイル画像から画像へ飛ぶためのHTML文字列を作成して、それを応答する。"""
-		vn = self.values[self.attributes().keys.index('no')]
-		vt = self.values[self.attributes().keys.index('thumbnail')]
-		vi = self.values[self.attributes().keys.index("image")]
-		width, height = self._input_table.thumbnail_filenames[vt].size
-		an_alt = []
-		an_alt.append(vt.split('/'))
-		current = len(an_alt) - 1
 
-		"""HTMLの文字列を生成"""
-		html_str = '<a name=\"'\
-					vn\
-					'\" href=\"'\
-					vi\
-					'\">'\
-					'<img class=\"borderless\" src=\"'\
-					vt\
-					'\" width=\"'\
-					width\
-					'\" height=\"'\
-					height\
-					'\" alt=\"'\
-					an_alt[current]\
-					'\"></a>'
-		return html_str
+		return None
 
 	def execute(self):
 		"""CSVファイルをHTMLページへと変換する。"""
 
 		# ダウンローダに必要なファイル群をすべてダウンロードしてもらい、
 		# 入力となるテーブルを獲得する。
-		a_downloader = Downloader(self._input_table)
+		a_downloader = 
+		(self._input_table)
 		a_downloader.perform()
 
 		# トランスレータに入力となるテーブルを渡して変換してもらい、
@@ -106,32 +85,5 @@ class Translator(object):
 
 	def translate(self):
 		"""CSVファイルを基にしたテーブルから、HTMLページを基にするテーブルに変換する。"""
-		Reader.perform()
-		roop1 = 0
-		header = []
-		for a_string in self._input_table.attributes().names:
-			if roop1 != self._input_table.attributes().keys.index('thumbnail'):
-				header.append(a_string)
-				if roop1 == self._input_table.attributes().keys.index("period"):
-					header.append("在位日数")
-			roop1+=1
-		self._output_table.attributes()._names(header)
-
-		roop2 = 0
-		for　a_tuple in self._input_table.values():
-			elements = []
-			roop3 = 0
-			for another_string in a_tuple.values():
-				if roop3 == self._input_table.attributes().keys.index("thumbnail"):
-					if roop3 == self._input_table.attributes().keys.index("image"):
-						elements.append(compute_string_of_image(a_tuple))
-					else:
-						elements.append(another_string)
-					if roop3 == self._input_table.attributes().keys.index("period"):
-						elements.append(compute_string_of_days(another_string))
-				roop3+=1
-			another_tuple = Tuple(self._output_table.attributes(), elements)
-			self._output_table.append(another_tuple)
-			roop2+=1
 
 		return
