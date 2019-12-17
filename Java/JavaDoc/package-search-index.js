@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"csv2html"},{"l":"すべてのパッケージ","url":"allpackages-index.html"}]
