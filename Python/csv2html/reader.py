@@ -19,10 +19,10 @@ class Reader(IO):
 	def perform(self):
 		"""ダウンロードしたCSVファイルを読み込む。""" 
 		first = True
-    	filename = os.path.join(self.attributes().base_directory(), csv_url.split('/')[-1])
-    	with codecs.open(filename, 'r', 'utf-8') as a_filename:
-        	for a_line in filename:
-            	a_string = a_line.split()[0]
+		filename = os.path.join(self.attributes().base_directory(), csv_url.split('/')[-1])
+		with codecs.open(filename, 'r', 'utf-8') as a_filename:
+			for a_line in filename:
+				a_string = a_line.split()[0]
 				if first :
 					Table(attributes.names, a_line)
 					first = False
