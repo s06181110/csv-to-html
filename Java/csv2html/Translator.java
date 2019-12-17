@@ -10,24 +10,24 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
-* トランスレータ：CSVファイルをHTMLページへと変換するプログラム。
-*/
+ * トランスレータ：CSVファイルをHTMLページへと変換するプログラム。
+ */
 public class Translator extends Object
 {
 	/**
-	* CSVに由来するテーブルを記憶するフィールド。
-	*/
+	 * CSVに由来するテーブルを記憶するフィールド。
+	 */
 	private Table inputTable;
 
 	/**
-	* HTMLに由来するテーブルを記憶するフィールド。
-	*/
+	 * HTMLに由来するテーブルを記憶するフィールド。
+	 */
 	private Table outputTable;
 
 	/**
-	* 属性リストのクラスを指定したトランスレータのコンストラクタ。
-	* @param classOfAttributes 属性リストのクラス
-	*/
+	 * 属性リストのクラスを指定したトランスレータのコンストラクタ。
+	 * @param classOfAttributes 属性リストのクラス
+	 */
 	public Translator(Class<? extends Attributes> classOfAttributes)
 	{
 		super();
@@ -50,10 +50,10 @@ public class Translator extends Object
 	}
 
 	/**
-	* 在位日数を計算して、それを文字列にして応答する。
-	* @param periodString 在位期間の文字列
-	* @return 在位日数の文字列
-	*/
+	 * 在位日数を計算して、それを文字列にして応答する。
+	 * @param periodString 在位期間の文字列
+	 * @return 在位日数の文字列
+	 */
 	public String computeNumberOfDays(String periodString)
 	{
 		List<String> aList = IO.splitString(periodString, "年月日〜");
@@ -78,12 +78,12 @@ public class Translator extends Object
 	}
 
 	/**
-	* サムネイル画像から画像へ飛ぶためのHTML文字列を作成して、それを応答する。
-	* @param aString 画像の文字列
-	* @param aTuple タプル
-	* @param aNumber 番号
-	* @return サムネイル画像から画像へ飛ぶためのHTML文字列
-	*/
+	 * サムネイル画像から画像へ飛ぶためのHTML文字列を作成して、それを応答する。
+	 * @param aString 画像の文字列
+	 * @param aTuple タプル
+	 * @param aNumber 番号
+	 * @return サムネイル画像から画像へ飛ぶためのHTML文字列
+	 */
 	public String computeStringOfImage(String aString, Tuple aTuple, int aNumber)
 	{
 		String aImageName = aTuple.values().get(aTuple.attributes().indexOfNo());
@@ -112,8 +112,8 @@ public class Translator extends Object
 	}
 
 	/**
-	* CSVファイルをHTMLページへ変換する。
-	*/
+	 * CSVファイルをHTMLページへ変換する。
+	 */
 	public void execute()
 	{
 		// 必要な情報をダウンロードする。
@@ -143,9 +143,9 @@ public class Translator extends Object
 	}
 
 	/**
-	* 属性リストのクラスを受け取って、CSVファイルをHTMLページへと変換するクラスメソッド。
-	* @param classOfAttributes 属性リストのクラス
-	*/
+	 * 属性リストのクラスを受け取って、CSVファイルをHTMLページへと変換するクラスメソッド。
+	 * @param classOfAttributes 属性リストのクラス
+	 */
 	public static void perform(Class<? extends Attributes> classOfAttributes)
 	{
 		// トランスレータのインスタンスを生成する。
@@ -157,17 +157,10 @@ public class Translator extends Object
 	}
 
 	/**
-	* CSVファイルを基にしたテーブルから、HTMLページを基にするテーブルに変換する。
+	 * CSVファイルを基にしたテーブルから、HTMLページを基にするテーブルに変換する。
 	*/
 	public void translate()
 	{
-<<<<<<< HEAD
-		Reader aReader = new Reader(this.inputTable);
-		aReader.perform();
-=======
-		List<String> aList1 = new ArrayList<>();
-		byte b1 = 0;
->>>>>>> 106652f5b63d1ce275227ce6bf17ce308e72daed
 		List<String> aList = new ArrayList<>();
 		Byte aByte = 0;
 		for (String str : this.inputTable.attributes().names()) {
