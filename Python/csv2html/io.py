@@ -22,11 +22,8 @@ class IO(object):
 
 	def read_csv(self, filename):
 		"""指定されたファイルをCSVとして読み込み、行リストを応答する。"""
-		a_list = []
-		with open(filename, 'r') as a_file:
-			for a_line in a_file:
-				a_list.append(a_line)
-		return a_list
+
+		return None
 
 	@classmethod
 	def html_canonical_string(the_class, a_string):

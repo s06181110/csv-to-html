@@ -111,8 +111,8 @@ class AttributesForPrimeMinisters(Attributes):
 	def csv_url(the_class):
 		"""CSVファイルをURLで応答する。"""
 
-		return the_class.base_url() + 'PrimeMinisters.csv'
-		# return the_class.base_url() + 'PrimeMinisters2.csv'
+		# return the_class.base_url() + 'PrimeMinisters.csv'
+		return the_class.base_url() + 'PrimeMinisters2.csv'
 
 	@classmethod
 	def title_string(the_class):
@@ -158,8 +158,8 @@ class AttributesForTokugawaShogunate(Attributes):
 	def csv_url(the_class):
 		"""CSVファイルをURLで応答する。"""
 
-		return the_class.base_url() + 'TokugawaShogunate.csv'
-		# return the_class.base_url() + 'TokugawaShogunate2.csv'
+		# return the_class.base_url() + 'TokugawaShogunate.csv'
+		return the_class.base_url() + 'TokugawaShogunate2.csv'
 
 	@classmethod
 	def title_string(the_class):

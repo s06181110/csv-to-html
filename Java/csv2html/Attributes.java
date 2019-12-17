@@ -249,7 +249,10 @@ abstract class Attributes extends Object
 	public void names(List<String> aCollection)
 	{
 		List<String> aList = new ArrayList<String>();
-		aCollection.forEach(aList::add);
+		for (String aString : aCollection)
+		{
+			aList.add(aString);
+		}
 		this.names = aList;
 
 		return;

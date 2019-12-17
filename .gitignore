@@ -8,6 +8,5 @@
 .metadata
 
 # 実行時に生成されるファイルを除外
-*.pyc
 Classes
 csv2html.jar
