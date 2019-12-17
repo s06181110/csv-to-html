@@ -11,14 +11,14 @@ import java.util.Calendar;
 import utility.StringUtility;
 
 /**
- * ライタ：情報のテーブルをHTMLページとして書き出す。
- */
+* ライタ：情報のテーブルをHTMLページとして書き出す。
+*/
 public class Writer extends IO
 {
 	/**
-	 * ライタのコンストラクタ。
-	 * @param aTable テーブル
-	 */
+	* ライタのコンストラクタ。
+	* @param aTable テーブル
+	*/
 	public Writer(Table aTable)
 	{
 		super(aTable);
@@ -27,8 +27,8 @@ public class Writer extends IO
 	}
 
 	/**
-	 * HTMLページを基にするテーブルからインデックスファイル(index.html)に書き出す。
-	 */
+	* HTMLページを基にするテーブルからインデックスファイル(index.html)に書き出す。
+	*/
 	public void perform()
 	{
 		try
@@ -53,9 +53,9 @@ public class Writer extends IO
 	}
 
 	/**
-	 * 属性リストを書き出す。
-	 * @param aWriter ライタ
-	 */
+	* 属性リストを書き出す。
+	* @param aWriter ライタ
+	*/
 	public void writeAttributesOn(BufferedWriter aWriter)
 	{
 		try {
@@ -76,9 +76,9 @@ public class Writer extends IO
 	}
 
 	/**
-	 * フッタを書き出す。
-	 * @param aWriter ライタ
-	 */
+	* フッタを書き出す。
+	* @param aWriter ライタ
+	*/
 	public void writeFooterOn(BufferedWriter aWriter)
 	{
 		Class<?> clazz = getClass();
@@ -115,9 +115,9 @@ public class Writer extends IO
 	}
 
 	/**
-	 * ヘッダを書き出す。
-	 * @param aWriter ライタ
-	 */
+	* ヘッダを書き出す。
+	* @param aWriter ライタ
+	*/
 	public void writeHeaderOn(BufferedWriter aWriter)
 	{
 		try {

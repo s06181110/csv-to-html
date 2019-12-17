@@ -161,8 +161,6 @@ public class Translator extends Object
 	*/
 	public void translate()
 	{
-		Reader aReader = new Reader(this.inputTable);
-		aReader.perform();
 		List<String> aList1 = new ArrayList<>();
 		byte b1 = 0;
 		for (String str : this.inputTable.attributes().names()) {
