@@ -129,9 +129,9 @@ public class Writer extends IO
 	}
 
 	/**
-	* ボディを書き出す。
-	* @param aWriter ライタ
-	*/
+	 * ボディを書き出す。
+	 * @param aWriter ライタ
+	 */
 	public void writeTableBodyOn(BufferedWriter aWriter)
 	{
 		this.writeAttributesOn(aWriter);
@@ -141,9 +141,9 @@ public class Writer extends IO
 	}
 
 	/**
-	* タプル群を書き出す。
-	* @param aWriter ライタ
-	*/
+	 * タプル群を書き出す。
+	 * @param aWriter ライタ
+	 */
 	public void writeTuplesOn(BufferedWriter aWriter)
 	{
 		try {
