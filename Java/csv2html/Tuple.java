@@ -51,7 +51,7 @@ public class Tuple extends Object
 		Class<?> aClass = this.getClass();
 		aBuffer.append(aClass.getName());
 		aBuffer.append("[");
-		int index = 0;
+		Integer index = 0;
 		for (String aString : this.values())
 		{
 			if (index != 0) { aBuffer.append(","); }

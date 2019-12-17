@@ -88,13 +88,12 @@ public class Table extends Object
 	{
 		if (this.images != null) { return this.images; }
 		this.images = new ArrayList<BufferedImage>();
-		for (Tuple aTuple : this.tuples())
-		{
+		this.tuples().forEach(aTuple -> {
 			String aString = aTuple.values().get(aTuple.attributes().indexOfImage());
 			BufferedImage anImage = this.picture(aString);
 			this.images.add(anImage);
-		}
-
+		});
+		
 		return this.images;
 	}
 
@@ -157,11 +156,10 @@ public class Table extends Object
 		aBuffer.append(aClass.getName());
 		aBuffer.append("[");
 		aBuffer.append(this.attributes());
-		for (Tuple aTuple : this.tuples())
-		{
+		this.tuples().forEach(aTuple -> {
 			aBuffer.append(",");
 			aBuffer.append(aTuple);
-		}
+		});
 		aBuffer.append("]");
 
 		return aBuffer.toString();
