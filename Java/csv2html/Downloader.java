@@ -92,9 +92,9 @@ public class Downloader extends IO
 	}
 
 	/**
-     * 画像やcsvファイルを格納するディレクトリを生成する。
-     * @param aString 生成するディレクトリ名
-     */
+	 * 画像やcsvファイルを格納するディレクトリを生成する。
+	 * @param aString 生成するディレクトリ名
+	 */
 	public void makeAssetDir(String aString){
 		aString = super.attributes().baseDirectory() + aString;
 		File aDirectory = new File(aString);
