@@ -107,7 +107,7 @@ public class Writer extends IO
 		stringBuffer.append(String.format("%1$02d", new Object[] { Integer.valueOf(second) }));
 		String aTime = stringBuffer.toString();
 		try {
-			aWriter.write("\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</td>\n\t\t</tr>\n\t</tbody>\n</table>\n<hr>\n<div class=\"right-small\">Created by " + className + aDate + aTime + "</div>\n</body>\n</html>\n");
+			aWriter.write("\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</td>\n\t\t</tr>\n\t</tbody>\n</table>\n<hr>\n<div class=\"right-small\">Created by AOKI Atsushi, IKEDA Keisuke, ENOMOTO Yoshiki, SHIZUNO Tomoya, TSUJI Karin and FUKUI Kosuke (CSV2HTML written by Java)" + aDate + aTime + "</div>\n</body>\n</html>\n");
 		} catch (IOException iOException) {
 			iOException.printStackTrace();
 		}
