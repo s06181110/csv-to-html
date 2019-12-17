@@ -163,6 +163,10 @@ public class Translator extends Object
 	{
 		List<String> aList1 = new ArrayList<>();
 		byte b1 = 0;
+		Reader aReader = new Reader(this.inputTable);
+		aReader.perform();
+		List<String> aList = new ArrayList<>();
+		Byte aByte = 0;
 		for (String str : this.inputTable.attributes().names()) {
 			if (b1 != this.inputTable.attributes().indexOfThumbnail()) {
 				aList1.add(str);
