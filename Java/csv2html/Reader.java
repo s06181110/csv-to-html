@@ -16,7 +16,7 @@ public class Reader extends IO
 	public Reader(Table aTable)
 	{
 		super(aTable);
-
+		
 		return;
 	}
 
@@ -25,19 +25,17 @@ public class Reader extends IO
 	*/
 	public void perform()
 	{
-		Table aTable = this.table();
-		List<String> aList = IO.readTextFromURL(aTable.attributes().csvUrl());
-		Boolean aBoolean = true;
-		for(String aString : aList){
-			List<String> anotherList =  IO.splitString(aString, ",\n");
-			if(aBoolean) {
-				aTable.attributes().names(anotherList);
-				aBoolean = false;
-				continue;
+		String fileString = super.attributes().baseDirectory() + "csv" + File.separator + "'" + super.attributes().titleString() + "'" + ".csv";
+		List<String> csvList = IO.readTextFromFile(fileString);
+		csvList.forEach(aString -> {
+			List<String> stringList = IO.splitString(aString, ",\n");
+			if(csvList.get(0) == aString) {
+				super.attributes().names(stringList);
+				return;
 			}
-			Tuple aTuple = new Tuple(aTable.attributes(), anotherList);
-			aTable.add(aTuple);
-		}
+			Tuple aTuple = new Tuple(super.attributes(), stringList);
+			super.table().add(aTuple);
+		});
 
 		return;
 	}

@@ -28,9 +28,13 @@ public class Downloader extends IO
 	{
 		System.out.println("From: " + super.attributes().csvUrl());
 		List<String> aList = IO.readTextFromURL(super.attributes().csvUrl());
+
 		System.out.println("To: " + super.attributes().baseDirectory());
-		String aString = super.attributes().baseDirectory() + File.separator + "csv" + File.separator + "'" + super.attributes().titleString() + "'" + ".csv";
-		IO.writeText(aList, aString);
+		this.makeAssetDir("csv");
+		String fileString = super.attributes().baseDirectory() + "csv" + File.separator + "'" + super.attributes().titleString() + "'" + ".csv";
+
+		IO.writeText(aList, fileString);
+		return;
 	}
 
 	/**
@@ -38,6 +42,7 @@ public class Downloader extends IO
 	*/
 	public void downloadImages()
 	{
+		this.makeAssetDir("images");
 		int indexOfImage = this.attributes().indexOfImage();
 		this.downloadPictures(indexOfImage);
 
@@ -50,16 +55,15 @@ public class Downloader extends IO
 	*/
 	private void downloadPictures(int indexOfPicture)
 	{
-		for(Tuple aTuple : super.tuples()){
+		super.tuples().forEach(aTuple -> {
 			String aString = aTuple.values().get(indexOfPicture);
-			String anotherString = super.attributes().baseUrl() + aString;
-			System.out.println("From: " + anotherString);
-			BufferedImage aBufferedImage = ImageUtility.readImageFromURL(anotherString);
+			String urlString = super.attributes().baseUrl() + aString;
+			System.out.println("From: " + urlString);
+			BufferedImage aBufferedImage = ImageUtility.readImageFromURL(urlString);
 			aString = super.attributes().baseDirectory() + aString;
 			ImageUtility.writeImage(aBufferedImage, aString);
 			System.out.println("To: " + aString);
-
-		}
+		});
 
 		return;
 	}
@@ -69,6 +73,7 @@ public class Downloader extends IO
 	*/
 	public void downloadThumbnails()
 	{
+		this.makeAssetDir("thumbnails");
 		int indexOfThumbnail = this.attributes().indexOfThumbnail();
 		this.downloadPictures(indexOfThumbnail);
 
@@ -80,14 +85,13 @@ public class Downloader extends IO
 	*/
 	public void perform()
 	{
+		this.downloadCSV();
+
 		Reader aReader = new Reader(super.table());
 		aReader.perform();
-		this.makeAssetDir("csv");
-		this.makeAssetDir("images");
-		this.makeAssetDir("thumbnails");
-		this.downloadCSV();
 		this.downloadImages();
 		this.downloadThumbnails();
+
 		return;
 	}
 
