@@ -32,7 +32,7 @@ class Translator(object):
 
 	def compute_string_of_days(self, period):
 		"""在位日数を計算して、それを文字列にして応答する。"""
-		time_list = map(int, period.split('[年, 月, 日, 〜]'))
+		time_list = [int(x) for x in re.split('[年月日〜]', period) if x != '']
 		start_datetime = datetime(time_list[:3])
 		dt_now = datetime.datetime.now()
 		end_datetime = datetime(time_list[3:]) if time_list.len() > 3 else datetime(dt_now.year, dt_now.month, dt_now.day)
