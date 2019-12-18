@@ -36,7 +36,7 @@ class Downloader(IO):
 		for image_file in image_filenames:
 			image_url = self.attributes().base_url() + image_file
 			print("From: " + image_url)
-			image_path = self.attributes().base_directory() + image_file
+			image_path = os.path.join(self.attributes().base_directory(), image_file)
 			print("To: " + image_path)
 			urllib.urlretrieve(image_url,  image_path)
 		return
@@ -46,6 +46,9 @@ class Downloader(IO):
 		self.download_csv()
 		a_reader = Reader(self.table())
 		a_reader.perform()
+		os.makedirs(os.path.join(self.attributes().base_directory(), "images"))
+		os.makedirs(os.path.join(self.attributes().base_directory(), "thumbnails"))
+
 		self.download_images(self.table().image_filenames())
 		self.download_images(self.table().thumbnail_filenames())
 
