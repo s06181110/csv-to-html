@@ -48,7 +48,7 @@ class Translator(object):
 
 		# ダウンローダに必要なファイル群をすべてダウンロードしてもらい、
 		# 入力となるテーブルを獲得する。
-		a_downloader = (self._input_table)
+		a_downloader = Downloader(self._input_table)
 		a_downloader.perform()
 
 		# トランスレータに入力となるテーブルを渡して変換してもらい、

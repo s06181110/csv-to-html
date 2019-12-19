@@ -21,10 +21,10 @@ class Reader(IO):
 		first = True
 		filename = os.path.join(self.attributes().base_directory(), self.attributes().csv_url().split('/')[-1])
 		for a_line in self.read_csv(filename):
-			if first :
+			if first:
 				self.attributes()._names = a_line
 				first = False
 				continue
-			a_tuple = Tuple(self.attributes(), a_line.split(','))
+			a_tuple = Tuple(self.attributes(), a_line)
 			self.table().add(a_tuple)
 		return
