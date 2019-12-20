@@ -5,7 +5,7 @@ import datetime
 import os
 import sys
 
-from io import IO
+from csv2html.io import IO
 
 class Writer(IO):
 	"""ライタ：情報のテーブルをHTMLページとして書き出す。"""
