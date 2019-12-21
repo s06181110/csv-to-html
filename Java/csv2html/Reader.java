@@ -24,7 +24,7 @@ public class Reader extends IO
 	/**
 	 * ダウンロードしたCSVファイルを読み込む。
 	 */
-	public void perform()
+	public synchronized void run()
 	{
 		Table aTable = this.table();
 		List<String> aList = IO.readTextFromURL(aTable.attributes().csvUrl());
