@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from attributes import AttributesForPrimeMinisters
-from attributes import AttributesForTokugawaShogunate
-from translator import Translator
+from csv2html.attributes import AttributesForPrimeMinisters, AttributesForTokugawaShogunate
+from csv2html.translator import Translator
 
 class Example(object):
 	"""例題プログラム：CSVファイルをHTMLページへと変換する。"""

@@ -3,8 +3,8 @@
 
 import os
 
-from io import IO
-from tuple import Tuple
+from csv2html.io import IO
+from csv2html.tuple import Tuple
 
 class Reader(IO):
 	"""リーダ：情報を記したCSVファイルを読み込んでテーブルに仕立て上げる。"""

@@ -3,11 +3,11 @@
 
 import os
 import shutil
-import urllib
+import urllib.request
 
-from io import IO
-from reader import Reader
-from table import Table
+from csv2html.io import IO
+from csv2html.reader import Reader
+from csv2html.table import Table
 
 class Downloader(IO):
 	"""ダウンローダ：CSVファイル・画像ファイル・サムネイル画像ファイルをダウンロードする。"""
@@ -28,7 +28,7 @@ class Downloader(IO):
 		if os.path.exists(filename) and os.path.isfile(filename):
 			pass
 		else:
-			urllib.urlretrieve(csv_url, filename)
+			urllib.request.urlretrieve(csv_url, filename)
 		return
 
 	def download_images(self, image_filenames):
@@ -38,7 +38,7 @@ class Downloader(IO):
 			print("From: " + image_url)
 			image_path = os.path.join(self.attributes().base_directory(), image_file)
 			print("To: " + image_path)
-			urllib.urlretrieve(image_url,  image_path)
+			urllib.request.urlretrieve(image_url,  image_path)
 		return
 
 	def perform(self):
