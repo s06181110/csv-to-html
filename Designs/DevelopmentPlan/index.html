@@ -5,9 +5,9 @@
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta name="keywords" content="Aoki,Atsushi,Smalltalk,Smalltalker,Program,Programmer,Object,Oriented,Programming">
-<meta name="description" content="プログラミング言語「総理大臣ページ生成」">
-<meta name="author" content="AOKI Atsushi">
-<link rev="made" href="mailto:atsushi@cc.kyoto-su.ac.jp">
+<meta name="description" content="プログラミング言語「CSV2HTML」">
+<meta name="author" content="AOKI Atsushi, IKEDA Keisuke, ENOMOTO Yoshiki, SHIZUNO Tomoya, TSUJI Karin and FUKUI Kosuke">
+<link rev="made" href="mailto:秘密ダヨ❤️">
 <link rel="index" href="index-j.html">
 <style type="text/css">
 <!--
@@ -229,7 +229,7 @@ th {
 }
 -->
 </style>
-<title>プログラミング言語「総理大臣ページ生成」開発計画書</title>
+<title>プログラミング言語「CSV2HTML」開発計画書</title>
 </head>
 <body>
 <div id="menu">
@@ -247,7 +247,7 @@ th {
 </ul>
 </div>
 <hr>
-<h2>プログラミング言語「総理大臣ページ生成」開発計画書</h2>
+<h2>プログラミング言語「CSV2HTML」開発計画書</h2>
 <div class="belt">
 <h3><a name="Kaihatsutaisei">開発体制</a>（ガントチャートが必要）</h3>
 </div>
@@ -260,16 +260,15 @@ th {
         <tbody>
           <tr>
             <td align="right">プロジェクトマネージャ：</td>
-            <td align="left">志津野智哉</td>
+            <td align="left">志津野 智哉</td>
           </tr>
           <tr>
             <td align="right">デザイナ：</td>
-            <td align="left">志津野智哉</td>
+            <td align="left">志津野 智哉</td>
           </tr>
           <tr>
             <td align="right">プログラマ：</td>
-            <td align="left">だれか</td>
-          </tr>
+            <td align="left">池田 敬祐、榎本 啓希、志津野 智哉、辻 花鈴、福井 康介</td>
           <tr>
             <td align="right">テスタ：</td>
             <td align="left">だれか</td>
@@ -280,6 +279,7 @@ th {
     </tr>
   </tbody>
 </table>
+<h4>JavaProgram</h4>
 <table summary="table">
   <tbody>
     <tr>
@@ -288,47 +288,97 @@ th {
         <tbody>
           <tr>
             <td align="right">Attributes担当：</td>
-            <td align="left">榎本</td>
+            <td align="left">榎本 啓希</td>
           </tr>
           <tr>
             <td align="right">AttributesForPrimeMinisters担当：</td>
-            <td align="left">榎本</td>
+            <td align="left">榎本 啓希</td>
           </tr>
           <tr>
             <td align="right">AttributesForTokugawaShogunate担当：</td>
-            <td align="left">榎本</td>
+            <td align="left">榎本 啓希</td>
           </tr>
           <tr>
             <td align="right">Downloader担当：</td>
-            <td align="left">池田</td>
+            <td align="left">池田 敬祐、榎本 啓希、志津野 智哉</td>
           </tr>
-	  <tr>
+	        <tr>
             <td align="right">Example担当：</td>
-            <td align="left">榎本</td>
+            <td align="left">榎本 啓希</td>
           </tr>
           <tr>  
             <td align="right">IO担当：</td>
-            <td align="left">池田</td>
+            <td align="left">池田 敬祐</td>
           </tr>
           <tr>  
             <td align="right">Reader担当：</td>
-            <td align="left">池田</td>
+            <td align="left">池田 敬祐</td>
           </tr>
           <tr>  
             <td align="right">Table担当：</td>
-            <td align="left">辻</td>
+            <td align="left">池田 敬祐、辻 花鈴</td>
           </tr>
           <tr>  
             <td align="right">Translator担当：</td>
-            <td align="left">志津野</td>
+            <td align="left">池田 敬祐、志津野 智哉</td>
           </tr>
           <tr>  
             <td align="right">Tuple担当：</td>
-            <td align="left">辻</td>
+            <td align="left">池田 敬祐、辻 花鈴</td>
           </tr>
           <tr>  
             <td align="right">Writer担当：</td>
-            <td align="left">志津野</td>
+            <td align="left">池田 敬祐、志津野 智哉</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h4>PythonProgram</h4>
+<table summary="table">
+  <tbody>
+    <tr>
+      <td>
+      <table class="content" summary="table">
+        <tbody>
+          <tr>
+            <td align="right">attributes担当：</td>
+            <td align="left">榎本 啓希</td>
+          </tr>
+          <tr>
+            <td align="right">downloader担当：</td>
+            <td align="left">榎本 啓希</td>
+          </tr>
+	        <tr>
+            <td align="right">example担当：</td>
+            <td align="left">榎本 啓希</td>
+          </tr>
+          <tr>  
+            <td align="right">io担当：</td>
+            <td align="left">榎本 啓希</td>
+          </tr>
+          <tr>  
+            <td align="right">reader担当：</td>
+            <td align="left">池田 敬祐</td>
+          </tr>
+          <tr>  
+            <td align="right">table担当：</td>
+            <td align="left">榎本 啓希</td>
+          </tr>
+          <tr>  
+            <td align="right">translator担当：</td>
+            <td align="left">志津野 智哉、福井 康介</td>
+          </tr>
+          <tr>  
+            <td align="right">tuple担当：</td>
+            <td align="left">榎本 啓希</td>
+          </tr>
+          <tr>  
+            <td align="right">writer担当：</td>
+            <td align="left">池田 敬祐</td>
           </tr>
         </tbody>
       </table>
@@ -356,6 +406,6 @@ th {
   </tbody>
 </table>
 <hr>
-<div class="right-small">Copyright 2019 Project aokiken, Updated: 2019/12/17 (Created: 2009/11/11)</div>
+<div class="right-small">Copyright 2019 Project aokiken, Updated: 2019/12/21 (Created: 2009/11/11)</div>
 </body>
 </html>
