@@ -53,7 +53,7 @@ public class AttributesForKSUPresident extends Attributes
 	 */
 	public String baseUrl()
 	{
-		return "https://s06181110.github.io/csv-to-html/Designs/";
+		return "https://s06181110.github.io/csv-to-html/Designs/KSUPresident/";
 	}
 
 	/**
