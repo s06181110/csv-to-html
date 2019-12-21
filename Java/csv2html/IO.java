@@ -13,7 +13,7 @@ import java.io.UnsupportedEncodingException;
 /**
  * 入出力：リーダ・ダウンローダ・ライタを抽象する。
  */
-public abstract class IO extends Object
+public abstract class IO extends Thread
 {
 	/**
 	 * テーブル（表：スプレッドシート）を記憶するフィールド。

@@ -29,7 +29,7 @@ public class Writer extends IO
 	/**
 	 * HTMLページを基にするテーブルからインデックスファイル(index.html)に書き出す。
 	 */
-	public void perform()
+	public synchronized void run()
 	{
 		try
 		{

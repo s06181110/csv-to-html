@@ -78,10 +78,15 @@ public class Downloader extends IO
 	/**
 	 * 総理大臣の情報を記したCSVファイルをダウンロードして、画像群やサムネイル画像群もダウロードする。
 	 */
-	public void perform()
+	public synchronized void run()
 	{
 		Reader aReader = new Reader(super.table());
-		aReader.perform();
+		aReader.start();
+		try {
+            aReader.join();
+		} catch (InterruptedException interruptedException) {
+			interruptedException.printStackTrace();
+		}
 		this.makeAssetDir("csv");
 		this.makeAssetDir("images");
 		this.makeAssetDir("thumbnails");
