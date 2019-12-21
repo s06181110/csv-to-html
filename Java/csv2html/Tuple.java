@@ -25,7 +25,6 @@ public class Tuple extends Object
 	public Tuple(Attributes instanceOfAttributes, List<String> valueCollection)
 	{
 		super();
-
 		this.attributes = instanceOfAttributes;
 		this.values = valueCollection;
 
@@ -51,14 +50,13 @@ public class Tuple extends Object
 		Class<?> aClass = this.getClass();
 		aBuffer.append(aClass.getName());
 		aBuffer.append("[");
-		Integer index = 0;
-		for (String aString : this.values())
-		{
-			if (index != 0) { aBuffer.append(","); }
-			aBuffer.append(this.attributes().at(index));
+		Integer[] index = { 0 };
+		this.values.forEach(aString -> {
+			if (index[0] != 0) { aBuffer.append(","); }
+			aBuffer.append(this.attributes().at(index[0]));
 			aBuffer.append("(" + aString + ")");
-			index++;
-		}
+			index[0]++;
+		});
 		aBuffer.append("]");
 
 		return aBuffer.toString();

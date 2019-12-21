@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * トランスレータ：CSVファイルをHTMLページへと変換するプログラム。
@@ -31,17 +32,12 @@ public class Translator extends Object
 	public Translator(Class<? extends Attributes> classOfAttributes)
 	{
 		super();
-
 		Attributes.flushBaseDirectory();
-
-		try
-		{
+		try{
 			Constructor<? extends Attributes> aConstructor = classOfAttributes.getConstructor(String.class);
-
 			this.inputTable = new Table(aConstructor.newInstance("input"));
 			this.outputTable = new Table(aConstructor.newInstance("output"));
-		}
-		catch (NoSuchMethodException |
+		} catch (NoSuchMethodException |
 		InstantiationException |
 		IllegalAccessException |
 		InvocationTargetException anException) { anException.printStackTrace(); }
@@ -63,7 +59,6 @@ public class Translator extends Object
 		Integer livedDay = Integer.valueOf(aList.get(2)).intValue();
 		aCalendar.set(livedYear, livedMonth, livedDay);
 		Long bornedDate = aCalendar.getTime().getTime();
-
 		aCalendar = Calendar.getInstance();
 		if (aList.size() > 3) {
 			livedYear = Integer.valueOf(aList.get(3)).intValue();
@@ -140,8 +135,7 @@ public class Translator extends Object
         }
 
 		// ブラウザを立ち上げて閲覧する。
-		try
-		{
+		try {
 			Attributes attributes = this.outputTable.attributes();
 			String fileStringOfHTML = attributes.baseDirectory() + attributes.indexHTML();
 			ProcessBuilder aProcessBuilder = new ProcessBuilder("open", "-a", "Safari", fileStringOfHTML);
@@ -172,38 +166,41 @@ public class Translator extends Object
 	public void translate()
 	{
 		List<String> aList = new ArrayList<>();
-		Byte aByte = 0;
+		Integer aInteger = 0;
+
 		for (String str : this.inputTable.attributes().names()) {
-			if (aByte != this.inputTable.attributes().indexOfThumbnail()) {
+			if (aInteger != this.inputTable.attributes().indexOfThumbnail()) {
 				aList.add(str);
-				if (aByte == this.inputTable.attributes().indexOfPeriod())
+				if (aInteger == this.inputTable.attributes().indexOfPeriod())
 				aList.add("在位日数");
 			}
-			aByte++;
+			aInteger++;
 		}
 		this.outputTable.attributes().names(aList);
 
-		byte anotherByte = 0;
+		Integer anotherInteger = 0;
 		for (Tuple aTuple : this.inputTable.tuples()) {
 			List<String> anotherList = new ArrayList<>();
-			aByte = 0;
+			aInteger = 0;
 			for (String aString : aTuple.values()) {
-				if (aByte != this.inputTable.attributes().indexOfThumbnail()) {
-					if (aByte == this.inputTable.attributes().indexOfImage()) {
-						anotherList.add(computeStringOfImage(aString, aTuple, anotherByte));
+				if (aInteger != this.inputTable.attributes().indexOfThumbnail()) {
+					if (aInteger == this.inputTable.attributes().indexOfImage()) {
+						anotherList.add(computeStringOfImage(aString, aTuple, anotherInteger));
 					} else {
 						anotherList.add(aString);
 					}
-					if (aByte == this.inputTable.attributes().indexOfPeriod())
+					if (aInteger == this.inputTable.attributes().indexOfPeriod())
 					anotherList.add(computeNumberOfDays(aString));
 				}
-				aByte++;
+				aInteger++;
 			}
 			Tuple anotherTuple = new Tuple(this.outputTable.attributes(), anotherList);
 			this.outputTable.add(anotherTuple);
-			anotherByte++;
+			anotherInteger++;
 		}
 
 		return;
 	}
+
+	
 }

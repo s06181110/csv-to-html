@@ -27,7 +27,6 @@ public abstract class IO extends Thread
 	public IO(Table aTable)
 	{
 		super();
-
 		this.table = aTable;
 
 		return;

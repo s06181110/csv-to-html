@@ -3,6 +3,7 @@ package csv2html;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
+
 import utility.ImageUtility;
 
 /**
@@ -48,20 +49,26 @@ public class Downloader extends IO
 	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする。
 	 * @param indexOfPicture 画像のインデックス
 	 */
-	private void downloadPictures(int indexOfPicture)
+	private void downloadPictures(final int indexOfPicture)
 	{
-		for(Tuple aTuple : super.tuples()){
-			String aString = aTuple.values().get(indexOfPicture);
-			String anotherString = super.attributes().baseUrl() + aString;
-			System.out.println("From: " + anotherString);
-			BufferedImage aBufferedImage = ImageUtility.readImageFromURL(anotherString);
-			aString = super.attributes().baseDirectory() + aString;
-			ImageUtility.writeImage(aBufferedImage, aString);
-			System.out.println("To: " + aString);
-
-		}
-
+		super.tuples().stream()
+		.map(aTuple -> aTuple.values().get(indexOfPicture))
+		.forEach(this::downloadPicturesLog);
+			
 		return;
+	}
+
+	/**
+	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする時のログを出力する。
+	 * @param 各タプルの画像の属性
+	 */
+	public void downloadPicturesLog(String aString){
+		String anotherString = super.attributes().baseUrl() + aString;
+		System.out.println("From: " + anotherString);
+		BufferedImage aBufferedImage = ImageUtility.readImageFromURL(anotherString);
+		aString = super.attributes().baseDirectory() + aString;
+		ImageUtility.writeImage(aBufferedImage, aString);
+		System.out.println("To: " + aString);
 	}
 
 	/**
@@ -84,15 +91,14 @@ public class Downloader extends IO
 		aReader.start();
 		try {
             aReader.join();
-		} catch (InterruptedException interruptedException) {
-			interruptedException.printStackTrace();
-		}
+		} catch (InterruptedException interruptedException) { interruptedException.printStackTrace(); }
 		this.makeAssetDir("csv");
 		this.makeAssetDir("images");
 		this.makeAssetDir("thumbnails");
 		this.downloadCSV();
 		this.downloadImages();
 		this.downloadThumbnails();
+
 		return;
 	}
 

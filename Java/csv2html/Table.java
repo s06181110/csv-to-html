@@ -40,7 +40,6 @@ public class Table extends Object
 	public Table(Attributes instanceOfAttributes)
 	{
 		super();
-
 		this.attributes = instanceOfAttributes;
 		this.tuples = null;
 		this.images = null;
@@ -93,6 +92,7 @@ public class Table extends Object
 			BufferedImage anImage = this.picture(aString);
 			this.images.add(anImage);
 		});
+		
 		return this.images;
 	}
 
@@ -104,24 +104,13 @@ public class Table extends Object
 	private BufferedImage picture(String aString)
 	{
 		List<String> aList = IO.splitString(aString,"/");
-		// StringBuffer stringBuffer = new StringBuffer();
-		// for(String str: aList)
-		// {
-		// 	stringBuffer.append(File.separator);
-		// 	stringBuffer.append(str);
-		// }
 		String aImagePath = this.attributes.baseDirectory() + aList.get(0) + File.separator + aList.get(1);
 		File aFile = new File(aImagePath);
 		System.out.println(aImagePath);
 		BufferedImage bufferedImage = null;
-		try
-		{
+		try{
 			bufferedImage = ImageIO.read(aFile);
-		}
-		catch (IOException iOException)
-		{
-		      iOException.printStackTrace();
-		}
+		}catch (IOException iOException){ iOException.printStackTrace(); }
 
 		return bufferedImage;
 	}
