@@ -14,7 +14,8 @@ public class Reader extends IO
 	 * リーダのコンストラクタ。
 	 * @param aTable テーブル
 	 */
-	public Reader(final Table aTable) {
+	public Reader(final Table aTable) 
+	{
 		super(aTable);
 
 		return;
@@ -23,7 +24,8 @@ public class Reader extends IO
 	/**
 	 * ダウンロードしたCSVファイルを読み込む。
 	 */
-	public synchronized void run() {
+	public synchronized void run() 
+	{
 		final Table aTable = this.table();
 		final List<String> aList = IO.readTextFromURL(aTable.attributes().csvUrl());
 		Boolean aBoolean = true;
