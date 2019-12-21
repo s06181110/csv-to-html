@@ -120,9 +120,9 @@ public class Translator extends Object
 		Downloader aDownloader = new Downloader(this.inputTable);
 		aDownloader.start();
 		try {
-            aDownloader.join();
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
+			aDownloader.join();
+		} catch (InterruptedException interruptedException) {
+			interruptedException.printStackTrace();
         }
 
 		// CSVに由来するテーブルをHTMLに由来するテーブルへと変換する。
@@ -134,9 +134,9 @@ public class Translator extends Object
 		Writer aWriter = new Writer(this.outputTable);
 		aWriter.start();
 		try {
-            aWriter.join();
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
+			aWriter.join();
+		} catch (InterruptedException interruptedException) {
+			interruptedException.printStackTrace();
         }
 
 		// ブラウザを立ち上げて閲覧する。
