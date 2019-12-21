@@ -3,7 +3,6 @@ package csv2html;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
-
 import utility.ImageUtility;
 
 /**
@@ -15,8 +14,7 @@ public class Downloader extends IO
 	 * ダウンローダのコンストラクタ。
 	 * @param aTable テーブル
 	 */
-	public Downloader(Table aTable)
-	{
+	public Downloader(final Table aTable) {
 		super(aTable);
 
 		return;
@@ -25,21 +23,20 @@ public class Downloader extends IO
 	/**
 	 * 総理大臣の情報を記したCSVファイルをダウンロードする。
 	 */
-	public void downloadCSV()
-	{
+	public void downloadCSV() {
 		System.out.println("From: " + super.attributes().csvUrl());
-		List<String> aList = IO.readTextFromURL(super.attributes().csvUrl());
+		final List<String> aList = IO.readTextFromURL(super.attributes().csvUrl());
 		System.out.println("To: " + super.attributes().baseDirectory());
-		String aString = super.attributes().baseDirectory() + File.separator + "csv" + File.separator + "'" + super.attributes().titleString() + "'" + ".csv";
+		final String aString = super.attributes().baseDirectory() + File.separator + "csv" + File.separator + "'"
+				+ super.attributes().titleString() + "'" + ".csv";
 		IO.writeText(aList, aString);
 	}
 
 	/**
 	 * 総理大臣の画像群をダウンロードする。
 	 */
-	public void downloadImages()
-	{
-		int indexOfImage = this.attributes().indexOfImage();
+	public void downloadImages() {
+		final int indexOfImage = this.attributes().indexOfImage();
 		this.downloadPictures(indexOfImage);
 
 		return;
@@ -47,25 +44,24 @@ public class Downloader extends IO
 
 	/**
 	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする。
+	 * 
 	 * @param indexOfPicture 画像のインデックス
 	 */
-	private void downloadPictures(final int indexOfPicture)
-	{
-		super.tuples().stream()
-		.map(aTuple -> aTuple.values().get(indexOfPicture))
-		.forEach(this::downloadPicturesLog);
-			
+	private void downloadPictures(final int indexOfPicture) {
+		super.tuples().stream().map(aTuple -> aTuple.values().get(indexOfPicture)).forEach(this::downloadPicturesLog);
+
 		return;
 	}
 
 	/**
 	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする時のログを出力する。
+	 * 
 	 * @param 各タプルの画像の属性
 	 */
-	public void downloadPicturesLog(String aString){
-		String anotherString = super.attributes().baseUrl() + aString;
+	public void downloadPicturesLog(String aString) {
+		final String anotherString = super.attributes().baseUrl() + aString;
 		System.out.println("From: " + anotherString);
-		BufferedImage aBufferedImage = ImageUtility.readImageFromURL(anotherString);
+		final BufferedImage aBufferedImage = ImageUtility.readImageFromURL(anotherString);
 		aString = super.attributes().baseDirectory() + aString;
 		ImageUtility.writeImage(aBufferedImage, aString);
 		System.out.println("To: " + aString);
@@ -74,9 +70,8 @@ public class Downloader extends IO
 	/**
 	 * 総理大臣の画像群をダウンロードする。
 	 */
-	public void downloadThumbnails()
-	{
-		int indexOfThumbnail = this.attributes().indexOfThumbnail();
+	public void downloadThumbnails() {
+		final int indexOfThumbnail = this.attributes().indexOfThumbnail();
 		this.downloadPictures(indexOfThumbnail);
 
 		return;
@@ -85,13 +80,14 @@ public class Downloader extends IO
 	/**
 	 * 総理大臣の情報を記したCSVファイルをダウンロードして、画像群やサムネイル画像群もダウロードする。
 	 */
-	public synchronized void run()
-	{
-		Reader aReader = new Reader(super.table());
+	public synchronized void run() {
+		final Reader aReader = new Reader(super.table());
 		aReader.start();
 		try {
-            aReader.join();
-		} catch (InterruptedException interruptedException) { interruptedException.printStackTrace(); }
+			aReader.join();
+		} catch (final InterruptedException interruptedException) {
+			interruptedException.printStackTrace();
+		}
 		this.makeAssetDir("csv");
 		this.makeAssetDir("images");
 		this.makeAssetDir("thumbnails");
@@ -104,11 +100,12 @@ public class Downloader extends IO
 
 	/**
 	 * 画像やcsvファイルを格納するディレクトリを生成する。
+	 * 
 	 * @param aString 生成するディレクトリ名
 	 */
-	public void makeAssetDir(String aString){
+	public void makeAssetDir(String aString) {
 		aString = super.attributes().baseDirectory() + aString;
-		File aDirectory = new File(aString);
+		final File aDirectory = new File(aString);
 		if (!aDirectory.exists()) { aDirectory.mkdir(); }
 
 		return;

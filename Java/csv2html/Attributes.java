@@ -44,48 +44,55 @@ abstract class Attributes extends Object
 	 * @param index インデックス
 	 * @return 名前（キー）
 	 */
-	protected String at(int index)
-	{
+	protected String at(final int index) {
 		String aString = this.nameAt(index);
-		if (aString.length() < 1) { aString = this.keyAt(index); }
+		if (aString.length() < 1) {
+			aString = this.keyAt(index);
+		}
 
 		return aString;
 	}
 
 	/**
 	 * 標題文字列を応答する。
+	 * 
 	 * @return 標題文字列
 	 */
 	abstract String captionString();
 
 	/**
 	 * ページのためのディレクトリを応答する。
+	 * 
 	 * @return ページのためのディレクトリ
 	 */
 	abstract String baseDirectory();
 
 	/**
 	 * ページのためのディレクトリ（存在しなければ作成して）を応答する。
+	 * 
 	 * @param kindString 種別を表す文字列
 	 * @return ページのためのディレクトリ
 	 */
-	public String baseDirectory(String kindString)
-	{
+	public String baseDirectory(final String kindString) {
 		// ベースとなるディレクトリ（ページを生成するためのフォルダ）の記憶が水に流されるまで
 		// シングルトン（1回だけ）であることを保証する。
-		if (Attributes.baseDirectory != null) { return Attributes.baseDirectory; }
+		if (Attributes.baseDirectory != null) {
+			return Attributes.baseDirectory;
+		}
 
-		Date aDate = new Date();
+		final Date aDate = new Date();
 		// SimpleDateFormat aFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-		SimpleDateFormat aFormat = new SimpleDateFormat("yyyyMMdd");
-		String dateString = aFormat.format(aDate);
+		final SimpleDateFormat aFormat = new SimpleDateFormat("yyyyMMdd");
+		final String dateString = aFormat.format(aDate);
 
 		String aString = System.getProperty("user.home");
 		aString = aString + File.separator + "Desktop";
 		aString = aString + File.separator + "CSV2HTML_" + kindString + "_" + dateString;
-		File aDirectory = new File(aString);
+		final File aDirectory = new File(aString);
 		// ページのためのディレクトリが存在するならば消去しておく。
-		if (aDirectory.exists()) { IO.deleteFileOrDirectory(aDirectory); }
+		if (aDirectory.exists()) {
+			IO.deleteFileOrDirectory(aDirectory);
+		}
 		aDirectory.mkdirs();
 
 		Attributes.baseDirectory = aDirectory.getPath() + File.separator;
@@ -95,30 +102,31 @@ abstract class Attributes extends Object
 
 	/**
 	 * 情報の在処(URL)を文字列で応答する。
+	 * 
 	 * @return 情報の在処の文字列
 	 */
 	abstract String baseUrl();
 
 	/**
 	 * 情報を記したCSVファイルの在処(URL)を文字列で応答する。
+	 * 
 	 * @return 情報を記したCSVファイル文字列
 	 */
 	abstract String csvUrl();
 
 	/**
 	 * ページのためのローカルなHTMLのインデックスファイル(index.html)を文字列で応答する。
+	 * 
 	 * @return ページのためのローカルなHTMLのインデックスファイル文字列
 	 */
-	public String indexHTML()
-	{
+	public String indexHTML() {
 		return "index.html";
 	}
 
 	/**
 	 * ベースとなるディレクトリの記憶を水に流す。
 	 */
-	public static void flushBaseDirectory()
-	{
+	public static void flushBaseDirectory() {
 		Attributes.baseDirectory = null;
 
 		return;
@@ -126,15 +134,16 @@ abstract class Attributes extends Object
 
 	/**
 	 * 指定されたキー文字列のインデックスを応答する。
+	 * 
 	 * @param aString キー
 	 * @return インデックス
 	 */
-	protected int indexOf(String aString)
-	{
+	protected int indexOf(final String aString) {
 		int index = 0;
-		for (String aKey : this.keys)
-		{
-			if (aString.compareTo(aKey) == 0) { return index; }
+		for (final String aKey : this.keys) {
+			if (aString.compareTo(aKey) == 0) {
+				return index;
+			}
 			index++;
 		}
 
@@ -143,112 +152,112 @@ abstract class Attributes extends Object
 
 	/**
 	 * 在位日数のインデックスを応答する。
+	 * 
 	 * @return インデックス
 	 */
-	public int indexOfDays()
-	{
+	public int indexOfDays() {
 		return this.indexOf("days");
 	}
 
 	/**
 	 * 画像のインデックスを応答する。
+	 * 
 	 * @return インデックス
 	 */
-	public int indexOfImage()
-	{
+	public int indexOfImage() {
 		return this.indexOf("image");
 	}
 
 	/**
 	 * ふりがなのインデックスを応答する。
+	 * 
 	 * @return インデックス
 	 */
-	public int indexOfKana()
-	{
+	public int indexOfKana() {
 		return this.indexOf("kana");
 	}
 
 	/**
 	 * 氏名のインデックスを応答する。
+	 * 
 	 * @return インデックス
 	 */
-	public int indexOfName()
-	{
+	public int indexOfName() {
 		return this.indexOf("name");
 	}
 
 	/**
 	 * 番号のインデックスを応答する。
+	 * 
 	 * @return インデックス
 	 */
-	public int indexOfNo()
-	{
+	public int indexOfNo() {
 		return this.indexOf("no");
 	}
 
 	/**
 	 * 在位期間のインデックスを応答する。
+	 * 
 	 * @return インデックス
 	 */
-	public int indexOfPeriod()
-	{
+	public int indexOfPeriod() {
 		return this.indexOf("period");
 	}
 
 	/**
 	 * 縮小画像のインデックスを応答する。
+	 * 
 	 * @return インデックス
 	 */
-	public int indexOfThumbnail()
-	{
+	public int indexOfThumbnail() {
 		return this.indexOf("thumbnail");
 	}
 
 	/**
 	 * 指定されたインデックスに対応するキーを応答する。
+	 * 
 	 * @param index インデックス
 	 * @return キー
 	 */
-	protected String keyAt(int index)
-	{
+	protected String keyAt(final int index) {
 		return this.keys().get(index);
 	}
 
 	/**
 	 * キー群を応答する。
+	 * 
 	 * @return キー群
 	 */
-	public List<String> keys()
-	{
+	public List<String> keys() {
 		return this.keys;
 	}
 
 	/**
 	 * 指定されたインデックスに対応する名前を応答する。
+	 * 
 	 * @param index インデックス
 	 * @return 名前
 	 */
-	protected String nameAt(int index)
-	{
+	protected String nameAt(final int index) {
 		return this.names().get(index);
 	}
 
 	/**
 	 * 名前群を応答する。
+	 * 
 	 * @return 名前群
 	 */
-	public List<String> names()
-	{
+	public List<String> names() {
 		return this.names;
 	}
 
 	/**
 	 * 名前群を設定する。
+	 * 
 	 * @param aCollection 名前群
 	 */
-	public void names(List<String> aCollection)
-	{
-		List<String> aList = new ArrayList<String>();
+	public void names(final List<String> aCollection) {
+		final List<String> aList = new ArrayList<String>();
 		aCollection.forEach(aList::add);
 		this.names = aList;
 
@@ -257,27 +266,28 @@ abstract class Attributes extends Object
 
 	/**
 	 * 属性リストの長さを応答する。
+	 * 
 	 * @return 属性リストの長さ
 	 */
-	public int size()
-	{
+	public int size() {
 		return this.keys().size();
 	}
 
 	/**
 	 * タイトル文字列を応答する。
+	 * 
 	 * @return タイトル文字列
 	 */
 	abstract String titleString();
 
 	/**
 	 * 自分自身を文字列にして、それを応答する。
+	 * 
 	 * @return 自分自身の文字列
 	 */
-	public String toString()
-	{
-		StringBuffer aBuffer = new StringBuffer();
-		Class<?> aClass = this.getClass();
+	public String toString() {
+		final StringBuffer aBuffer = new StringBuffer();
+		final Class<?> aClass = this.getClass();
 		aBuffer.append(aClass.getName());
 		aBuffer.append("[");
 		for (int index = 0; index < this.size(); index++)

@@ -14,29 +14,27 @@ public class Reader extends IO
 	 * リーダのコンストラクタ。
 	 * @param aTable テーブル
 	 */
-	public Reader(Table aTable)
-	{
+	public Reader(final Table aTable) {
 		super(aTable);
-		
+
 		return;
 	}
 
 	/**
 	 * ダウンロードしたCSVファイルを読み込む。
 	 */
-	public synchronized void run()
-	{
-		Table aTable = this.table();
-		List<String> aList = IO.readTextFromURL(aTable.attributes().csvUrl());
+	public synchronized void run() {
+		final Table aTable = this.table();
+		final List<String> aList = IO.readTextFromURL(aTable.attributes().csvUrl());
 		Boolean aBoolean = true;
-		for(String aString : aList){
-			List<String> anotherList = Arrays.asList(aString.split(",", -1));
-			if(aBoolean) {
+		for (final String aString : aList) {
+			final List<String> anotherList = Arrays.asList(aString.split(",", -1));
+			if (aBoolean) {
 				aTable.attributes().names(anotherList);
 				aBoolean = false;
 				continue;
 			}
-			Tuple aTuple = new Tuple(aTable.attributes(), anotherList);
+			final Tuple aTuple = new Tuple(aTable.attributes(), anotherList);
 			aTable.add(aTuple);
 		}
 
