@@ -135,12 +135,11 @@ public class Table extends Object
 	{
 		if (thumbnails != null) { return this.thumbnails; }
 		this.thumbnails = new ArrayList<BufferedImage>();
-		for (Tuple aTuple : this.tuples())
-		{
+		this.tuples.forEach(aTuple -> {
 			String aString = aTuple.values().get(aTuple.attributes().indexOfThumbnail());
 			BufferedImage anImage = this.picture(aString);
 			this.thumbnails.add(anImage);
-		}
+		});
 
 		return this.thumbnails;
 	}
