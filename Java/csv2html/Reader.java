@@ -17,7 +17,7 @@ public class Reader extends IO
 	public Reader(Table aTable)
 	{
 		super(aTable);
-
+		
 		return;
 	}
 
