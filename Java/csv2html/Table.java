@@ -93,7 +93,6 @@ public class Table extends Object
 			BufferedImage anImage = this.picture(aString);
 			this.images.add(anImage);
 		});
-
 		return this.images;
 	}
 
@@ -160,6 +159,7 @@ public class Table extends Object
 			aBuffer.append(aTuple);
 		});
 		aBuffer.append("]");
+
 		return aBuffer.toString();
 	}
 
