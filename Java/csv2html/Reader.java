@@ -28,17 +28,18 @@ public class Reader extends IO
 	{
 		final Table aTable = this.table();
 		final List<String> aList = IO.readTextFromURL(aTable.attributes().csvUrl());
-		Boolean aBoolean = true;
-		for (final String aString : aList) {
-			final List<String> anotherList = Arrays.asList(aString.split(",", -1));
-			if (aBoolean) {
+		Boolean[] aBoolean = {true};
+		aList.stream()
+		.map(aString -> Arrays.asList(aString.split(",", -1)))
+		.forEach(anotherList -> {
+			if (aBoolean[0]) {
 				aTable.attributes().names(anotherList);
-				aBoolean = false;
-				continue;
+				aBoolean[0] = false;
+				return;
 			}
 			final Tuple aTuple = new Tuple(aTable.attributes(), anotherList);
 			aTable.add(aTuple);
-		}
+		});
 
 		return;
 	}
