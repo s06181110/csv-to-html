@@ -3,6 +3,7 @@ package csv2html;
 import java.io.File;
 import java.util.List;
 import utility.StringUtility;
+import java.util.Arrays;
 
 /**
  * リーダ：情報を記したCSVファイルを読み込んでテーブルに仕立て上げる。
@@ -29,7 +30,7 @@ public class Reader extends IO
 		List<String> aList = IO.readTextFromURL(aTable.attributes().csvUrl());
 		Boolean aBoolean = true;
 		for(String aString : aList){
-			List<String> anotherList =  IO.splitString(aString, ",\n");
+			List<String> anotherList = Arrays.asList(aString.split(",", -1));
 			if(aBoolean) {
 				aTable.attributes().names(anotherList);
 				aBoolean = false;
