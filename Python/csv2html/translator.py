@@ -3,11 +3,9 @@
 
 import subprocess
 import datetime
-import locale
 import os
 import os.path
 import re
-import shutil
 
 from PIL import Image
 

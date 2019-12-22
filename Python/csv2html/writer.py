@@ -3,7 +3,6 @@
 
 import datetime
 import os
-import sys
 
 from csv2html.io import IO
 

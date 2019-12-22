@@ -249,8 +249,234 @@ th {
 <hr>
 <h2>プログラミング言語「CSV2HTML」マニュアル</h2>
 <div class="belt">
-<h3><a name="KanseiSaseteKudasai">完成させてください</a></h3>
+<h3><a name="Install">インストール</a>(実行ファイルの作り方)</h3>
 </div>
+<ol>
+  <li><a href="../Program/PrimeMinistersByJava.zip">PrimeMnisterByJava.zip</a>のアーカイブファイルを適当な場所に展開する。
+  <pre class="belt">
+処理
+  </pre>
+  </li>
+  <li><a href="../Program/PrimeMinistersByPython.zip">PrimeMnisterByPython.zip</a>のアーカイブファイルを適当な場所に展開する。
+  <pre class="belt">
+処理
+   </pre>
+<div class="belt"><h3>ここからjava編が始まります。</h3></div>
+  </li><li>展開して得られるPrimeMinisterByJavaというディレクトリへ移る。
+  <pre class="belt">
+処理
+  </pre>
+</li><li>中身を確認する。
+<pre class="belt">
+処理
+</pre>
+  </li><li>makeする。
+  <pre class="belt">$ make
+env LC_ALL=en ant all
+Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
+Buildfile: /Users/yamashitasatoru/PL/PrimeMinisters/PrimeMinistersByJava/build.xml
+
+prepare:
+    [mkdir] Created dir: /Users/yamashitasatoru/PL/PrimeMinisters/PrimeMinistersByJava/Classes
+     [echo] on 2013/12/21 at 19:23:55
+
+compile:
+    [javac] Compiling 9 source files to /Users/yamashitasatoru/PL/PrimeMinisters/PrimeMinistersByJava/Classes
+     [echo] on 2013/12/21 at 19:23:55
+
+jar:
+      [jar] Building jar: /Users/yamashitasatoru/PL/PrimeMinisters/PrimeMinistersByJava/primeministers.jar
+     [echo] on 2013/12/21 at 19:23:55
+
+all:
+     [echo] on 2013/12/21 at 19:23:55
+
+BUILD SUCCESSFUL
+Total time: 5 seconds</pre>
+  </li><li>PrimeMinister.jarが生成されていることを確かめる。
+  <pre class="belt">$ ls *
+Makefile    primeministers.jar
+build.xml   primeministers.mf
+
+Classes:
+primeministers
+
+PrimeMinisters.app:
+Contents
+
+primeministers:
+Attributes.java Example.java  Reader.java Translator.java Writer.java
+Downloader.java IO.java   Table.java  Tuple.java</pre>
+  </li><li>生成したPrimeMinister.jarをアプリケーション（PrimeMinister.app）の中にインストールする。
+  <pre class="belt">$ make install
+	env LC_ALL=en ant install
+Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
+Buildfile: /Users/yamashitasatoru/PL/PrimeMinisters/PrimeMinistersByJava/build.xml
+
+prepare:
+     [echo] on 2013/12/21 at 19:26:40
+
+compile:
+     [echo] on 2013/12/21 at 19:26:40
+
+jar:
+     [echo] on 2013/12/21 at 19:26:40
+
+all:
+     [echo] on 2013/12/21 at 19:26:40
+
+install:
+     [copy] Copying 1 file to /Users/yamashitasatoru/PL/PrimeMinisters/PrimeMinistersByJava/PrimeMinisters.app/Contents/Resources/Java
+     [echo] on 2013/12/21 at 19:26:40
+
+BUILD SUCCESSFUL
+Total time: 1 second</pre>
+
+<div class="belt"><h3>ここからPython編が始まります。</h3></div>
+</li><li>展開して得られるPrimeMinisterByPyhotnというディレクトリへ移る。
+  <pre class="belt">$ cd PrimeMinisterByPython</pre>
+</li><li>中身を確認する。
+<pre class="belt">$ ls *
+MANIFEST    Makefile    setup.py
+MANIFEST.in   PrimeMinisters.py
+
+PrimeMinisters.app:
+Contents
+
+primeministers:
+__init__.py downloader.py io.py   table.py  tuple.py
+attributes.py example.py  reader.py translator.py writer.py</pre>
+  </li><li>makeし、前準備をする。
+  <pre class="belt">$ make
+rm -rf ~/Desktop/SouriDaijin
+</pre>
+  </li><li>PrimeMinisterByPythonのディレクトリの中身が正しいかを確認する。
+  <pre class="belt">$ ls *
+Makefile    primeministers.jar
+build.xml   primeministers.mf
+
+Classes:
+primeministers
+
+PrimeMinisters.app:
+Contents
+
+primeministers:
+Attributes.java Example.java  Reader.java Translator.java Writer.java
+Downloader.java IO.java   Table.java  Tuple.java</pre>
+  </li><li>生成したものをアプリケーション（PrimeMinister.app）の中にインストールする。
+  <pre class="belt">$ make install
+(cd /Users/yamashitasatoru/Desktop/PrimeMinistersByPython/PrimeMinisters.app/Contents/Resources/Python/; python PrimeMinisters.py) ; open ~/Desktop/SouriDaijin/index.html ; sleep 3; exit
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/images/039.jpg
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/images/040.jpg
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/images/041.jpg
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/images/042.jpg
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/images/043.jpg
+                  〜〜〜〜〜〜〜〜省略〜〜〜〜〜〜〜〜
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/thumbnails/058.jpg
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/thumbnails/059.jpg
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/thumbnails/060.jpg
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/thumbnails/061.jpg
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/thumbnails/062.jpg
+http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/CSV2HTML/PrimeMinisters/thumbnails/057.jpg
+Table =
+Attributes =
+  keys -no, order, names, kana, period, school, party, birth, image, thumbnail,
+  names - 人目, 代, 氏名, ふりがな, 在位期間, 出身校, 政党, 出身地, 画像, サムネイル,
+Tuple = \m  valuas -人目,代,氏名,ふりがな,在位期間,出身校,政党,出身地,画像,縮小画像,
+Tuple = \m  valuas -39,61-63,佐藤 榮作,さとう えいさく,1964年11月9日〜1972年7月7日,東京帝国大学 法学部,自由民主党,山口県,images/039.jpg,thumbnails/039.jpg,
+Tuple = \m  valuas -40,64-65,田中 角榮,たなか かくえい,1972年7月7日〜1974年12月9日,中央工学校,自由民主党,新潟県,images/040.jpg,thumbnails/040.jpg,
+Tuple = \m  valuas -41,66-66,三木 武夫,みき たけお,1974年12月9日〜1976年12月24日,明治大学 法学部,自由民主党,徳島県,images/041.jpg,thumbnails/041.jpg,
+Tuple = \m  valuas -42,67-67,福田 赳夫,ふくだ たけお,1976年12月24日〜1978年12月7日,東京帝国大学（東京大学） 法学部,自由民主党,群馬県,images/042.jpg,thumbnails/042.jpg,
+Tuple = \m  valuas -43,68-69,大平 正芳,おおひら まさよし,1978年12月7日〜1980年6月12日,東京商科大学（一橋大学）,自由民主党,香川県,images/043.jpg,thumbnails/043.jpg,
+晋三,あべ しんぞう,2006年9月26日〜2007年9月26日,成蹊大学 法学部,自由民主党,山口県,images/057.jpg,thumbnails/057.jpg,
+Tuple = \m  valuas -58,91-91,福田 康夫,ふくだ やすお,2007年9月26日〜2008年9月24日,早稲田大学 政治経済学部,自由民主党,群馬県,images/058.jpg,thumbnails/058.jpg,
+Tuple = \m  valuas -59,92-92,麻生 太郎,あそう たろう,2008年9月24日〜2009年9月16日,学習院大学 政治経済学部,自由民主党,福岡県,images/059.jpg,thumbnails/059.jpg,
+Tuple = \m  valuas -60,93-93,鳩山 由紀夫,はとやま ゆきお,2009年9月16日〜2010年6月8日,スタンフォード大学 大学院 経営工学,民主党,北海道,images/060.jpg,thumbnails/060.jpg,
+Tuple = \m  valuas -61,94-94,菅 直人,かん なおと,2010年6月8日〜2011年9月2日,東京工業大学 理学部,民主党,山口県,images/061.jpg,thumbnails/061.jpg,
+Tuple = \m  valuas -62,95-95,野田 佳彦,のだ よしひこ,2011年9月2日〜2012年12月26日,早稲田大学 政治経済学部,民主党,千葉県,images/062.jpg,thumbnails/062.jpg,
+Tuple = \m  valuas -65,96-,安倍 晋三,あべ しんぞう,2012年12月26日〜,成蹊大学 法学部,自由民主党,山口県,images/057.jpg,thumbnails/057.jpg,
+Table =
+Attributes =
+  keys -no, order, names, kana, period, day, school, party, birth, image,
+  names - 人目, 代, 氏名, ふりがな, 在位期間, 在位日数, 出身校, 政党, 出身地, 画像,
+Tuple = \m  valuas -39,61-63,佐藤 榮作,さとう えいさく,1964年11月9日〜1972年7月7日,2797,東京帝国大学 法学部,自由民主党,山口県,画像,
+Tuple = \m  valuas -40,64-65,田中 角榮,たなか かくえい,1972年7月7日〜1974年12月9日,885,中央工学校,自由民主党,新潟県,画像,
+Tuple = \m  valuas -41,66-66,三木 武夫,みき たけお,1974年12月9日〜1976年12月24日,746,明治大学 法学部,自由民主党,徳島県,画像,
+                  〜〜〜〜〜〜〜〜省略〜〜〜〜〜〜〜〜
+Tuple = \m  valuas -60,93-93,鳩山 由紀夫,はとやま ゆきお,2009年9月16日〜2010年6月8日,265,スタンフォード大学 大学院 経営工学,民主党,北海道,画像,
+Tuple = \m  valuas -61,94-94,菅 直人,かん なおと,2010年6月8日〜2011年9月2日,451,東京工業大学 理学部,民主党,山口県,画像,
+Tuple = \m  valuas -62,95-95,野田 佳彦,のだ よしひこ,2011年9月2日〜2012年12月26日,481,早稲田大学 政治経済学部,民主党,千葉県,画像,
+Tuple = \m  valuas -65,96-,安倍 晋三,あべ しんぞう,2012年12月26日〜,362,成蹊大学 法学部,自由民主党,山口県,画像,
+変換が終了し、htmlファイルを出力しました。
+logout
+
+[プロセスが完了しました]</pre>
+
+<div class="belt">
+<h3><a name="Execution">実行方法</a>（実行ファイルの動かし方）</h3>
+</div>
+<p>実行するためのコマンドは以下の通りである。</p>
+<p>java version</p>
+<blockquote><code>java -jar PrimeMinister.jar</code></blockquote>
+<p>Python version</p>
+<blockquote><code>make test</code></blockquote>
+<p>Mac OS Xの場合には、アプリケーションPrimeMinister.appをダブルクリックするほうが簡便である。</p>
+<blockquote>PrimeMinister.app<img class="borderless" src="images/aikon-aoki-2.png" width="128" height="128" alt="aikon-aoki-2.png"></blockquote>
+<p>また、openコマンドでPrimeMinister.appを開いても実行可能である。</p>
+<blockquote><code>open PrimeMinister.app</code></blockquote>
+<p>以下に実行例を示す。</p>
+<blockquote>
+  <table class="belt" summary="table">
+    <tbody>
+      <tr>
+        <td>
+        <p>SouriDaijinという名前のディレクトリが生成される。</p><table class="content" summary="table">
+          <tbody>
+            <tr>
+
+              <td class="center-small"><a href="images/Snapshot0.png"><img class="borderless" src="thumbnails/Snapshot0.png" width="700" height="450" alt="Snapshot0"></a></td>
+            </tr>
+          </tbody>
+        </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="belt" summary="table">
+    <tbody>
+      <tr>
+        <td>
+        <p>Webページが生成される。</p><table class="content" summary="table">
+          <tbody>
+            <tr>
+
+              <td class="center-small"><a href="images/Snapshot1.png"><img class="borderless" src="thumbnails/Snapshot1.png" width="700" height="450" alt="Snapshot1"></a></td>
+            </tr>
+          </tbody>
+        </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="belt" summary="table">
+    <tbody>
+      <tr>
+        <td>
+        <p>Webページに表示される。</p><table class="content" summary="table">
+          <tbody>
+              <tr>
+
+              <td class="center-small"><a href="images/Snapshot2.png"><img class="borderless" src="thumbnails/Snapshot2.png" width="700" height="450" alt="Snapshot2"></a></td>
+            </tr>
+          </tbody>
+        </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+</li></ol>
 <hr>
 <div class="right-small">Copyright 2019 Project aokiken, Updated: 2019/12/21 (Created: 2009/11/11)</div>
 </body>
