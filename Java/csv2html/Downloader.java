@@ -6,15 +6,15 @@ import java.util.List;
 import utility.ImageUtility;
 
 /**
-* ダウンローダ：CSVファイル・画像ファイル・サムネイル画像ファイルをダウンロードする。
-*/
+ * ダウンローダ：CSVファイル・画像ファイル・サムネイル画像ファイルをダウンロードする。
+ */
 public class Downloader extends IO
 {
 	/**
-	* ダウンローダのコンストラクタ。
-	* @param aTable テーブル
-	*/
-	public Downloader(Table aTable)
+	 * ダウンローダのコンストラクタ。
+	 * @param aTable テーブル
+	 */
+	public Downloader(final Table aTable)
 	{
 		super(aTable);
 
@@ -22,82 +22,92 @@ public class Downloader extends IO
 	}
 
 	/**
-	* 総理大臣の情報を記したCSVファイルをダウンロードする。
-	*/
+	 * 総理大臣の情報を記したCSVファイルをダウンロードする。
+	 */
 	public void downloadCSV()
 	{
 		System.out.println("From: " + super.attributes().csvUrl());
-		List<String> aList = IO.readTextFromURL(super.attributes().csvUrl());
-
+		final List<String> aList = IO.readTextFromURL(super.attributes().csvUrl());
 		System.out.println("To: " + super.attributes().baseDirectory());
-		this.makeAssetDir("csv");
-		String fileString = super.attributes().baseDirectory() + "csv" + File.separator + "'" + super.attributes().titleString() + "'" + ".csv";
-
-		IO.writeText(aList, fileString);
-		return;
+		final String aString = super.attributes().baseDirectory() + File.separator + "csv" + File.separator + "'" + super.attributes().titleString() + "'" + ".csv";
+		IO.writeText(aList, aString);
 	}
 
 	/**
-	* 総理大臣の画像群をダウンロードする。
-	*/
+	 * 総理大臣の画像群をダウンロードする。
+	 */
 	public void downloadImages()
 	{
-		this.makeAssetDir("images");
-		int indexOfImage = this.attributes().indexOfImage();
+		final int indexOfImage = this.attributes().indexOfImage();
 		this.downloadPictures(indexOfImage);
 
 		return;
 	}
 
 	/**
-	* 総理大臣の画像群またはサムネイル画像群をダウンロードする。
-	* @param indexOfPicture 画像のインデックス
-	*/
-	private void downloadPictures(int indexOfPicture)
+	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする。
+	 * @param indexOfPicture 画像のインデックス
+	 */
+	private void downloadPictures(final int indexOfPicture)
 	{
-		super.tuples().forEach(aTuple -> {
-			String aString = aTuple.values().get(indexOfPicture);
-			String urlString = super.attributes().baseUrl() + aString;
-			System.out.println("From: " + urlString);
-			BufferedImage aBufferedImage = ImageUtility.readImageFromURL(urlString);
-			aString = super.attributes().baseDirectory() + aString;
-			ImageUtility.writeImage(aBufferedImage, aString);
-			System.out.println("To: " + aString);
-		});
-
+		super.tuples().stream()
+		.map(aTuple -> aTuple.values().get(indexOfPicture))
+		.forEach(this::downloadPicturesLog);
+			
 		return;
 	}
 
 	/**
-	* 総理大臣の画像群をダウンロードする。
-	*/
+	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする時のログを出力する。
+	 * @param 各タプルの画像の属性
+	 */
+	public void downloadPicturesLog(String aString){
+		final String anotherString = super.attributes().baseUrl() + aString;
+		System.out.println("From: " + anotherString);
+		final BufferedImage aBufferedImage = ImageUtility.readImageFromURL(anotherString);
+		aString = super.attributes().baseDirectory() + aString;
+		ImageUtility.writeImage(aBufferedImage, aString);
+		System.out.println("To: " + aString);
+	}
+
+	/**
+	 * 総理大臣の画像群をダウンロードする。
+	 */
 	public void downloadThumbnails()
 	{
-		this.makeAssetDir("thumbnails");
-		int indexOfThumbnail = this.attributes().indexOfThumbnail();
+		final int indexOfThumbnail = this.attributes().indexOfThumbnail();
 		this.downloadPictures(indexOfThumbnail);
 
 		return;
 	}
 
 	/**
-	* 総理大臣の情報を記したCSVファイルをダウンロードして、画像群やサムネイル画像群もダウロードする。
-	*/
-	public void perform()
+	 * 総理大臣の情報を記したCSVファイルをダウンロードして、画像群やサムネイル画像群もダウロードする。
+	 */
+	public synchronized void run()
 	{
+		final Reader aReader = new Reader(super.table());
+		aReader.start();
+		try {
+            aReader.join();
+		} catch (final InterruptedException interruptedException) { interruptedException.printStackTrace(); }
+		this.makeAssetDir("csv");
+		this.makeAssetDir("images");
+		this.makeAssetDir("thumbnails");
 		this.downloadCSV();
-
-		Reader aReader = new Reader(super.table());
-		aReader.perform();
 		this.downloadImages();
 		this.downloadThumbnails();
 
 		return;
 	}
 
+	/**
+	 * 画像やcsvファイルを格納するディレクトリを生成する。
+	 * @param aString 生成するディレクトリ名
+	 */
 	public void makeAssetDir(String aString){
 		aString = super.attributes().baseDirectory() + aString;
-		File aDirectory = new File(aString);
+		final File aDirectory = new File(aString);
 		if (!aDirectory.exists()) { aDirectory.mkdir(); }
 
 		return;

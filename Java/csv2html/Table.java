@@ -9,38 +9,37 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 /**
-* 表：情報テーブル。
-*/
+ * 表：情報テーブル。
+ */
 public class Table extends Object
 {
 	/**
-	* 属性リストを記憶するフィールド。
-	*/
+	 * 属性リストを記憶するフィールド。
+	 */
 	private Attributes attributes;
 
 	/**
-	* タプル群を記憶するフィールド。
-	*/
+	 * タプル群を記憶するフィールド。
+	 */
 	private List<Tuple> tuples;
 
 	/**
-	* 画像群を記憶するフィールド。
-	*/
+	 * 画像群を記憶するフィールド。
+	 */
 	private List<BufferedImage> images;
 
 	/**
-	* サムネイル画像群を記憶するフィールド。
-	*/
+	 * サムネイル画像群を記憶するフィールド。
+	 */
 	private List<BufferedImage> thumbnails;
 
 	/**
-	* テーブルのコンストラクタ。
-	* @param instanceOfAttributes 属性リスト
-	*/
-	public Table(Attributes instanceOfAttributes)
+	 * テーブルのコンストラクタ。
+	 * @param instanceOfAttributes 属性リスト
+	 */
+	public Table(final Attributes instanceOfAttributes)
 	{
 		super();
-
 		this.attributes = instanceOfAttributes;
 		this.tuples = null;
 		this.images = null;
@@ -50,10 +49,10 @@ public class Table extends Object
 	}
 
 	/**
-	* タプルを追加する。
-	* @param aTuple タプル
-	*/
-	public void add(Tuple aTuple)
+	 * タプルを追加する。
+	 * @param aTuple タプル
+	 */
+	public void add(final Tuple aTuple)
 	{
 		this.tuples().add(aTuple);
 
@@ -61,19 +60,19 @@ public class Table extends Object
 	}
 
 	/**
-	* 属性リストを応答する。
-	* @return 属性リスト
-	*/
+	 * 属性リストを応答する。
+	 * @return 属性リスト
+	 */
 	public Attributes attributes()
 	{
 		return this.attributes;
 	}
 
 	/**
-	* 属性リストを設定する。
-	* @param instanceOfAttributes 属性リスト
-	*/
-	public void attributes(Attributes instanceOfAttributes)
+	 * 属性リストを設定する。
+	 * @param instanceOfAttributes 属性リスト
+	 */
+	public void attributes(final Attributes instanceOfAttributes)
 	{
 		this.attributes = instanceOfAttributes;
 
@@ -81,16 +80,16 @@ public class Table extends Object
 	}
 
 	/**
-	* 画像群を応答する。
-	* @return 画像群
-	*/
+	 * 画像群を応答する。
+	 * @return 画像群
+	 */
 	public List<BufferedImage> images()
 	{
 		if (this.images != null) { return this.images; }
 		this.images = new ArrayList<BufferedImage>();
 		this.tuples().forEach(aTuple -> {
-			String aString = aTuple.values().get(aTuple.attributes().indexOfImage());
-			BufferedImage anImage = this.picture(aString);
+			final String aString = aTuple.values().get(aTuple.attributes().indexOfImage());
+			final BufferedImage anImage = this.picture(aString);
 			this.images.add(anImage);
 		});
 		
@@ -98,61 +97,49 @@ public class Table extends Object
 	}
 
 	/**
-	* 画像またはサムネイル画像の文字列を受けとって当該画像を応答する。
-	* @param aString 画像またはサムネイル画像の文字列
-	* @return 画像
-	*/
-	private BufferedImage picture(String aString)
+	 * 画像またはサムネイル画像の文字列を受けとって当該画像を応答する。
+	 * @param aString 画像またはサムネイル画像の文字列
+	 * @return 画像
+	 */
+	private BufferedImage picture(final String aString)
 	{
-		List<String> aList = IO.splitString(aString,"/");
-		// StringBuffer stringBuffer = new StringBuffer();
-		// for(String str: aList)
-		// {
-		// 	stringBuffer.append(File.separator);
-		// 	stringBuffer.append(str);
-		// }
-		String aImagePath = this.attributes.baseDirectory() + aList.get(0) + File.separator + aList.get(1);
-		File aFile = new File(aImagePath);
+		final List<String> aList = IO.splitString(aString,"/");
+		final String aImagePath = this.attributes.baseDirectory() + aList.get(0) + File.separator + aList.get(1);
+		final File aFile = new File(aImagePath);
 		System.out.println(aImagePath);
 		BufferedImage bufferedImage = null;
-		try
-		{
+		try{
 			bufferedImage = ImageIO.read(aFile);
-		}
-		catch (IOException iOException)
-		{
-			iOException.printStackTrace();
-		}
+		}catch (final IOException iOException){ iOException.printStackTrace(); }
 
 		return bufferedImage;
 	}
 
 	/**
-	* サムネイル画像群を応答する。
-	* @return サムネイル画像群
-	*/
+	 * サムネイル画像群を応答する。
+	 * @return サムネイル画像群
+	 */
 	public List<BufferedImage> thumbnails()
 	{
 		if (thumbnails != null) { return this.thumbnails; }
 		this.thumbnails = new ArrayList<BufferedImage>();
-		for (Tuple aTuple : this.tuples())
-		{
-			String aString = aTuple.values().get(aTuple.attributes().indexOfThumbnail());
-			BufferedImage anImage = this.picture(aString);
+		this.tuples.forEach(aTuple -> {
+			final String aString = aTuple.values().get(aTuple.attributes().indexOfThumbnail());
+			final BufferedImage anImage = this.picture(aString);
 			this.thumbnails.add(anImage);
-		}
+		});
 
 		return this.thumbnails;
 	}
 
 	/**
-	* 自分自身を文字列にして、それを応答する。
-	* @return 自分自身の文字列
-	*/
+	 * 自分自身を文字列にして、それを応答する。
+	 * @return 自分自身の文字列
+	 */
 	public String toString()
 	{
-		StringBuffer aBuffer = new StringBuffer();
-		Class<?> aClass = this.getClass();
+		final StringBuffer aBuffer = new StringBuffer();
+		final Class<?> aClass = this.getClass();
 		aBuffer.append(aClass.getName());
 		aBuffer.append("[");
 		aBuffer.append(this.attributes());
@@ -166,9 +153,9 @@ public class Table extends Object
 	}
 
 	/**
-	* タプル群を応答する。
-	* @return タプル群
-	*/
+	 * タプル群を応答する。
+	 * @return タプル群
+	 */
 	public List<Tuple> tuples()
 	{
 		if (this.tuples != null) { return this.tuples; }
