@@ -37,10 +37,9 @@ public class Table extends Object
 	 * テーブルのコンストラクタ。
 	 * @param instanceOfAttributes 属性リスト
 	 */
-	public Table(Attributes instanceOfAttributes)
+	public Table(final Attributes instanceOfAttributes)
 	{
 		super();
-
 		this.attributes = instanceOfAttributes;
 		this.tuples = null;
 		this.images = null;
@@ -53,7 +52,7 @@ public class Table extends Object
 	 * タプルを追加する。
 	 * @param aTuple タプル
 	 */
-	public void add(Tuple aTuple)
+	public void add(final Tuple aTuple)
 	{
 		this.tuples().add(aTuple);
 
@@ -73,7 +72,7 @@ public class Table extends Object
 	 * 属性リストを設定する。
 	 * @param instanceOfAttributes 属性リスト
 	 */
-	public void attributes(Attributes instanceOfAttributes)
+	public void attributes(final Attributes instanceOfAttributes)
 	{
 		this.attributes = instanceOfAttributes;
 
@@ -89,10 +88,11 @@ public class Table extends Object
 		if (this.images != null) { return this.images; }
 		this.images = new ArrayList<BufferedImage>();
 		this.tuples().forEach(aTuple -> {
-			String aString = aTuple.values().get(aTuple.attributes().indexOfImage());
-			BufferedImage anImage = this.picture(aString);
+			final String aString = aTuple.values().get(aTuple.attributes().indexOfImage());
+			final BufferedImage anImage = this.picture(aString);
 			this.images.add(anImage);
 		});
+		
 		return this.images;
 	}
 
@@ -101,27 +101,16 @@ public class Table extends Object
 	 * @param aString 画像またはサムネイル画像の文字列
 	 * @return 画像
 	 */
-	private BufferedImage picture(String aString)
+	private BufferedImage picture(final String aString)
 	{
-		List<String> aList = IO.splitString(aString,"/");
-		// StringBuffer stringBuffer = new StringBuffer();
-		// for(String str: aList)
-		// {
-		// 	stringBuffer.append(File.separator);
-		// 	stringBuffer.append(str);
-		// }
-		String aImagePath = this.attributes.baseDirectory() + aList.get(0) + File.separator + aList.get(1);
-		File aFile = new File(aImagePath);
+		final List<String> aList = IO.splitString(aString,"/");
+		final String aImagePath = this.attributes.baseDirectory() + aList.get(0) + File.separator + aList.get(1);
+		final File aFile = new File(aImagePath);
 		System.out.println(aImagePath);
 		BufferedImage bufferedImage = null;
-		try
-		{
+		try{
 			bufferedImage = ImageIO.read(aFile);
-		}
-		catch (IOException iOException)
-		{
-		      iOException.printStackTrace();
-		}
+		}catch (final IOException iOException){ iOException.printStackTrace(); }
 
 		return bufferedImage;
 	}
@@ -135,8 +124,8 @@ public class Table extends Object
 		if (thumbnails != null) { return this.thumbnails; }
 		this.thumbnails = new ArrayList<BufferedImage>();
 		this.tuples.forEach(aTuple -> {
-			String aString = aTuple.values().get(aTuple.attributes().indexOfThumbnail());
-			BufferedImage anImage = this.picture(aString);
+			final String aString = aTuple.values().get(aTuple.attributes().indexOfThumbnail());
+			final BufferedImage anImage = this.picture(aString);
 			this.thumbnails.add(anImage);
 		});
 
@@ -149,8 +138,8 @@ public class Table extends Object
 	 */
 	public String toString()
 	{
-		StringBuffer aBuffer = new StringBuffer();
-		Class<?> aClass = this.getClass();
+		final StringBuffer aBuffer = new StringBuffer();
+		final Class<?> aClass = this.getClass();
 		aBuffer.append(aClass.getName());
 		aBuffer.append("[");
 		aBuffer.append(this.attributes());

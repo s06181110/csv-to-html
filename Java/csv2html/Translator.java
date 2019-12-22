@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * トランスレータ：CSVファイルをHTMLページへと変換するプログラム。
@@ -28,20 +29,15 @@ public class Translator extends Object
 	 * 属性リストのクラスを指定したトランスレータのコンストラクタ。
 	 * @param classOfAttributes 属性リストのクラス
 	 */
-	public Translator(Class<? extends Attributes> classOfAttributes)
+	public Translator(final Class<? extends Attributes> classOfAttributes)
 	{
 		super();
-
 		Attributes.flushBaseDirectory();
-
-		try
-		{
-			Constructor<? extends Attributes> aConstructor = classOfAttributes.getConstructor(String.class);
-
+		try{
+			final Constructor<? extends Attributes> aConstructor = classOfAttributes.getConstructor(String.class);
 			this.inputTable = new Table(aConstructor.newInstance("input"));
 			this.outputTable = new Table(aConstructor.newInstance("output"));
-		}
-		catch (NoSuchMethodException |
+		} catch (NoSuchMethodException |
 		InstantiationException |
 		IllegalAccessException |
 		InvocationTargetException anException) { anException.printStackTrace(); }
@@ -54,16 +50,15 @@ public class Translator extends Object
 	 * @param periodString 在位期間の文字列
 	 * @return 在位日数の文字列
 	 */
-	public String computeNumberOfDays(String periodString)
+	public String computeNumberOfDays(final String periodString)
 	{
-		List<String> aList = IO.splitString(periodString, "年月日〜");
+		final List<String> aList = IO.splitString(periodString, "年月日〜");
 		Calendar aCalendar = Calendar.getInstance();
 		Integer livedYear = Integer.valueOf(aList.get(0)).intValue();
 		Integer livedMonth = Integer.valueOf(aList.get(1)).intValue() - 1;
 		Integer livedDay = Integer.valueOf(aList.get(2)).intValue();
 		aCalendar.set(livedYear, livedMonth, livedDay);
-		Long bornedDate = aCalendar.getTime().getTime();
-
+		final Long bornedDate = aCalendar.getTime().getTime();
 		aCalendar = Calendar.getInstance();
 		if (aList.size() > 3) {
 			livedYear = Integer.valueOf(aList.get(3)).intValue();
@@ -71,8 +66,8 @@ public class Translator extends Object
 			livedDay = Integer.valueOf(aList.get(5)).intValue();
 			aCalendar.set(livedYear, livedMonth, livedDay);
 		}
-		Long deadDate = aCalendar.getTime().getTime();
-		Long livedDate = (deadDate - bornedDate) / 86400000L + 1L;
+		final Long deadDate = aCalendar.getTime().getTime();
+		final Long livedDate = (deadDate - bornedDate) / 86400000L + 1L;
 
 		return String.format("%1$,d", new Object[] { Long.valueOf(livedDate) });
 	}
@@ -84,15 +79,15 @@ public class Translator extends Object
 	 * @param aNumber 番号
 	 * @return サムネイル画像から画像へ飛ぶためのHTML文字列
 	 */
-	public String computeStringOfImage(String aString, Tuple aTuple, int aNumber)
+	public String computeStringOfImage(final String aString, final Tuple aTuple, final int aNumber)
 	{
-		String aImageName = aTuple.values().get(aTuple.attributes().indexOfNo());
-		String aImagePath = aTuple.values().get(aTuple.attributes().indexOfThumbnail());
-		BufferedImage bufferedImage = this.inputTable.thumbnails().get(aNumber);
+		final String aImageName = aTuple.values().get(aTuple.attributes().indexOfNo());
+		final String aImagePath = aTuple.values().get(aTuple.attributes().indexOfThumbnail());
+		final BufferedImage bufferedImage = this.inputTable.thumbnails().get(aNumber);
 		Integer imagePathIndex = aTuple.attributes().indexOfThumbnail();
-		List<String> aList = IO.splitString(aTuple.values().get(imagePathIndex), "/");
+		final List<String> aList = IO.splitString(aTuple.values().get(imagePathIndex), "/");
 		imagePathIndex = aList.size() - 1;
-		StringBuffer stringBuffer = new StringBuffer();
+		final StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append("<a name=\"");
 		stringBuffer.append(aImageName);
 		stringBuffer.append("\" href=\"");
@@ -117,11 +112,11 @@ public class Translator extends Object
 	public void execute()
 	{
 		// 必要な情報をダウンロードする。
-		Downloader aDownloader = new Downloader(this.inputTable);
+		final Downloader aDownloader = new Downloader(this.inputTable);
 		aDownloader.start();
 		try {
 			aDownloader.join();
-		} catch (InterruptedException interruptedException) {
+		} catch (final InterruptedException interruptedException) {
 			interruptedException.printStackTrace();
         }
 
@@ -131,23 +126,22 @@ public class Translator extends Object
 		System.out.println(this.outputTable);
 
 		// HTMLに由来するテーブルから書き出す。
-		Writer aWriter = new Writer(this.outputTable);
+		final Writer aWriter = new Writer(this.outputTable);
 		aWriter.start();
 		try {
 			aWriter.join();
-		} catch (InterruptedException interruptedException) {
+		} catch (final InterruptedException interruptedException) {
 			interruptedException.printStackTrace();
         }
 
 		// ブラウザを立ち上げて閲覧する。
-		try
-		{
-			Attributes attributes = this.outputTable.attributes();
-			String fileStringOfHTML = attributes.baseDirectory() + attributes.indexHTML();
-			ProcessBuilder aProcessBuilder = new ProcessBuilder("open", "-a", "Safari", fileStringOfHTML);
+		try {
+			final Attributes attributes = this.outputTable.attributes();
+			final String fileStringOfHTML = attributes.baseDirectory() + attributes.indexHTML();
+			final ProcessBuilder aProcessBuilder = new ProcessBuilder("open", "-a", "Safari", fileStringOfHTML);
 			aProcessBuilder.start();
 		}
-		catch (Exception anException) { anException.printStackTrace(); }
+		catch (final Exception anException) { anException.printStackTrace(); }
 
 		return;
 	}
@@ -156,10 +150,10 @@ public class Translator extends Object
 	 * 属性リストのクラスを受け取って、CSVファイルをHTMLページへと変換するクラスメソッド。
 	 * @param classOfAttributes 属性リストのクラス
 	 */
-	public static void perform(Class<? extends Attributes> classOfAttributes)
+	public static void perform(final Class<? extends Attributes> classOfAttributes)
 	{
 		// トランスレータのインスタンスを生成する。
-		Translator aTranslator = new Translator(classOfAttributes);
+		final Translator aTranslator = new Translator(classOfAttributes);
 		// トランスレータにCSVファイルをHTMLページへ変換するように依頼する。
 		aTranslator.execute();
 
@@ -171,39 +165,42 @@ public class Translator extends Object
 	*/
 	public void translate()
 	{
-		List<String> aList = new ArrayList<>();
-		Byte aByte = 0;
-		for (String str : this.inputTable.attributes().names()) {
-			if (aByte != this.inputTable.attributes().indexOfThumbnail()) {
+		final List<String> aList = new ArrayList<>();
+		Integer aInteger = 0;
+
+		for (final String str : this.inputTable.attributes().names()) {
+			if (aInteger != this.inputTable.attributes().indexOfThumbnail()) {
 				aList.add(str);
-				if (aByte == this.inputTable.attributes().indexOfPeriod())
+				if (aInteger == this.inputTable.attributes().indexOfPeriod())
 				aList.add("在位日数");
 			}
-			aByte++;
+			aInteger++;
 		}
 		this.outputTable.attributes().names(aList);
 
-		byte anotherByte = 0;
-		for (Tuple aTuple : this.inputTable.tuples()) {
-			List<String> anotherList = new ArrayList<>();
-			aByte = 0;
-			for (String aString : aTuple.values()) {
-				if (aByte != this.inputTable.attributes().indexOfThumbnail()) {
-					if (aByte == this.inputTable.attributes().indexOfImage()) {
-						anotherList.add(computeStringOfImage(aString, aTuple, anotherByte));
+		Integer anotherInteger = 0;
+		for (final Tuple aTuple : this.inputTable.tuples()) {
+			final List<String> anotherList = new ArrayList<>();
+			aInteger = 0;
+			for (final String aString : aTuple.values()) {
+				if (aInteger != this.inputTable.attributes().indexOfThumbnail()) {
+					if (aInteger == this.inputTable.attributes().indexOfImage()) {
+						anotherList.add(computeStringOfImage(aString, aTuple, anotherInteger));
 					} else {
 						anotherList.add(aString);
 					}
-					if (aByte == this.inputTable.attributes().indexOfPeriod())
+					if (aInteger == this.inputTable.attributes().indexOfPeriod())
 					anotherList.add(computeNumberOfDays(aString));
 				}
-				aByte++;
+				aInteger++;
 			}
-			Tuple anotherTuple = new Tuple(this.outputTable.attributes(), anotherList);
+			final Tuple anotherTuple = new Tuple(this.outputTable.attributes(), anotherList);
 			this.outputTable.add(anotherTuple);
-			anotherByte++;
+			anotherInteger++;
 		}
 
 		return;
 	}
+
+	
 }

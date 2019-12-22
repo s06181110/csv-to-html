@@ -14,7 +14,7 @@ public class Downloader extends IO
 	 * ダウンローダのコンストラクタ。
 	 * @param aTable テーブル
 	 */
-	public Downloader(Table aTable)
+	public Downloader(final Table aTable)
 	{
 		super(aTable);
 
@@ -27,9 +27,9 @@ public class Downloader extends IO
 	public void downloadCSV()
 	{
 		System.out.println("From: " + super.attributes().csvUrl());
-		List<String> aList = IO.readTextFromURL(super.attributes().csvUrl());
+		final List<String> aList = IO.readTextFromURL(super.attributes().csvUrl());
 		System.out.println("To: " + super.attributes().baseDirectory());
-		String aString = super.attributes().baseDirectory() + File.separator + "csv" + File.separator + "'" + super.attributes().titleString() + "'" + ".csv";
+		final String aString = super.attributes().baseDirectory() + File.separator + "csv" + File.separator + "'" + super.attributes().titleString() + "'" + ".csv";
 		IO.writeText(aList, aString);
 	}
 
@@ -38,7 +38,7 @@ public class Downloader extends IO
 	 */
 	public void downloadImages()
 	{
-		int indexOfImage = this.attributes().indexOfImage();
+		final int indexOfImage = this.attributes().indexOfImage();
 		this.downloadPictures(indexOfImage);
 
 		return;
@@ -48,20 +48,26 @@ public class Downloader extends IO
 	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする。
 	 * @param indexOfPicture 画像のインデックス
 	 */
-	private void downloadPictures(int indexOfPicture)
+	private void downloadPictures(final int indexOfPicture)
 	{
-		for(Tuple aTuple : super.tuples()){
-			String aString = aTuple.values().get(indexOfPicture);
-			String anotherString = super.attributes().baseUrl() + aString;
-			System.out.println("From: " + anotherString);
-			BufferedImage aBufferedImage = ImageUtility.readImageFromURL(anotherString);
-			aString = super.attributes().baseDirectory() + aString;
-			ImageUtility.writeImage(aBufferedImage, aString);
-			System.out.println("To: " + aString);
-
-		}
-
+		super.tuples().stream()
+		.map(aTuple -> aTuple.values().get(indexOfPicture))
+		.forEach(this::downloadPicturesLog);
+			
 		return;
+	}
+
+	/**
+	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする時のログを出力する。
+	 * @param 各タプルの画像の属性
+	 */
+	public void downloadPicturesLog(String aString){
+		final String anotherString = super.attributes().baseUrl() + aString;
+		System.out.println("From: " + anotherString);
+		final BufferedImage aBufferedImage = ImageUtility.readImageFromURL(anotherString);
+		aString = super.attributes().baseDirectory() + aString;
+		ImageUtility.writeImage(aBufferedImage, aString);
+		System.out.println("To: " + aString);
 	}
 
 	/**
@@ -69,7 +75,7 @@ public class Downloader extends IO
 	 */
 	public void downloadThumbnails()
 	{
-		int indexOfThumbnail = this.attributes().indexOfThumbnail();
+		final int indexOfThumbnail = this.attributes().indexOfThumbnail();
 		this.downloadPictures(indexOfThumbnail);
 
 		return;
@@ -80,19 +86,18 @@ public class Downloader extends IO
 	 */
 	public synchronized void run()
 	{
-		Reader aReader = new Reader(super.table());
+		final Reader aReader = new Reader(super.table());
 		aReader.start();
 		try {
             aReader.join();
-		} catch (InterruptedException interruptedException) {
-			interruptedException.printStackTrace();
-		}
+		} catch (final InterruptedException interruptedException) { interruptedException.printStackTrace(); }
 		this.makeAssetDir("csv");
 		this.makeAssetDir("images");
 		this.makeAssetDir("thumbnails");
 		this.downloadCSV();
 		this.downloadImages();
 		this.downloadThumbnails();
+
 		return;
 	}
 
@@ -102,7 +107,7 @@ public class Downloader extends IO
 	 */
 	public void makeAssetDir(String aString){
 		aString = super.attributes().baseDirectory() + aString;
-		File aDirectory = new File(aString);
+		final File aDirectory = new File(aString);
 		if (!aDirectory.exists()) { aDirectory.mkdir(); }
 
 		return;

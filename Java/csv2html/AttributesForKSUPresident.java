@@ -3,12 +3,12 @@ package csv2html;
 import java.io.File;
 
 /**
- * 属性リスト：徳川幕府の情報テーブルを入出力する際の属性情報を記憶。
+ * 属性リスト：京都産業大学学長の情報テーブルを入出力する際の属性情報を記憶。
  */
 public class AttributesForKSUPresident extends Attributes
 {
 	/**
-	 * 入力用("input")または出力用("output")で徳川幕府の属性リストを作成するコンストラクタ。
+	 * 入力用("input")または出力用("output")で京都産業大学学長の属性リストを作成するコンストラクタ。
 	 * @param aString 入力用("input")または出力用("output")
 	 */
 	public AttributesForKSUPresident(String aString)
@@ -39,8 +39,8 @@ public class AttributesForKSUPresident extends Attributes
 	}
 
 	/**
-	 * 徳川幕府のページのためのディレクトリを応答する。
-	 * @return 徳川幕府のページのためのディレクトリ
+	 * 京都産業大学学長のページのためのディレクトリを応答する。
+	 * @return 京都産業大学学長のページのためのディレクトリ
 	 */
 	public String baseDirectory()
 	{
@@ -48,8 +48,8 @@ public class AttributesForKSUPresident extends Attributes
 	}
 
 	/**
-	 * 徳川幕府の情報の在処(URL)を文字列で応答する。
-	 * @return 徳川幕府の情報の在処の文字列
+	 * 京都産業大学学長の情報の在処(URL)を文字列で応答する。
+	 * @return 京都産業大学学長の情報の在処の文字列
 	 */
 	public String baseUrl()
 	{
@@ -57,17 +57,17 @@ public class AttributesForKSUPresident extends Attributes
 	}
 
 	/**
-	 * 徳川幕府の情報を記したCSVファイルの在処(URL)を文字列で応答する。
+	 * 京都産業大学学長の情報を記したCSVファイルの在処(URL)を文字列で応答する。
 	 * @return 情報を記したCSVファイル文字列
 	 */
 	public String csvUrl()
 	{
 		return this.baseUrl() + "KSUPresident.csv";
-		// return this.baseUrl() + "TokugawaShogunate2.csv";
+		//return this.baseUrl() + "TokugawaShogunate2.csv";
 	}
 
 	/**
-	 * 墓所のインデックスを応答する。
+	 * 学歴のインデックスを応答する。
 	 * @return インデックス
 	 */
 	public int indexOfEducation()
