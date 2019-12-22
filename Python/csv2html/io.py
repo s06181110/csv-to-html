@@ -23,7 +23,6 @@ class IO(object):
 	def read_csv(self, filename):
 		"""指定されたファイルをCSVとして読み込み、行リストを応答する。"""
 		rows = []
-		first = True
 		with open(filename, 'r') as a_file:
 			reader = csv.reader(a_file)
 			for row in reader:
