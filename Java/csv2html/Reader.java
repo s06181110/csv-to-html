@@ -3,6 +3,7 @@ package csv2html;
 import java.io.File;
 import java.util.List;
 import utility.StringUtility;
+import java.util.Arrays;
 
 /**
  * リーダ：情報を記したCSVファイルを読み込んでテーブルに仕立て上げる。
@@ -13,7 +14,7 @@ public class Reader extends IO
 	 * リーダのコンストラクタ。
 	 * @param aTable テーブル
 	 */
-	public Reader(Table aTable)
+	public Reader(final Table aTable)
 	{
 		super(aTable);
 
@@ -23,21 +24,22 @@ public class Reader extends IO
 	/**
 	 * ダウンロードしたCSVファイルを読み込む。
 	 */
-	public void perform()
+	public synchronized void run()
 	{
-		Table aTable = this.table();
-		List<String> aList = IO.readTextFromURL(aTable.attributes().csvUrl());
-		Boolean aBoolean = true;
-		for(String aString : aList){
-			List<String> anotherList =  IO.splitString(aString, ",\n");
-			if(aBoolean) {
+		final Table aTable = this.table();
+		final List<String> aList = IO.readTextFromURL(aTable.attributes().csvUrl());
+		Boolean[] aBoolean = {true};
+		aList.stream()
+		.map(aString -> Arrays.asList(aString.split(",", -1)))
+		.forEach(anotherList -> {
+			if (aBoolean[0]) {
 				aTable.attributes().names(anotherList);
-				aBoolean = false;
-				continue;
+				aBoolean[0] = false;
+				return;
 			}
-			Tuple aTuple = new Tuple(aTable.attributes(), anotherList);
+			final Tuple aTuple = new Tuple(aTable.attributes(), anotherList);
 			aTable.add(aTuple);
-		}
+		});
 
 		return;
 	}

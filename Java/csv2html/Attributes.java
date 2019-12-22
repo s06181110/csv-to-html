@@ -44,7 +44,7 @@ abstract class Attributes extends Object
 	 * @param index インデックス
 	 * @return 名前（キー）
 	 */
-	protected String at(int index)
+	protected String at(final int index)
 	{
 		String aString = this.nameAt(index);
 		if (aString.length() < 1) { aString = this.keyAt(index); }
@@ -69,21 +69,21 @@ abstract class Attributes extends Object
 	 * @param kindString 種別を表す文字列
 	 * @return ページのためのディレクトリ
 	 */
-	public String baseDirectory(String kindString)
+	public String baseDirectory(final String kindString)
 	{
 		// ベースとなるディレクトリ（ページを生成するためのフォルダ）の記憶が水に流されるまで
 		// シングルトン（1回だけ）であることを保証する。
 		if (Attributes.baseDirectory != null) { return Attributes.baseDirectory; }
 
-		Date aDate = new Date();
+		final Date aDate = new Date();
 		// SimpleDateFormat aFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-		SimpleDateFormat aFormat = new SimpleDateFormat("yyyyMMdd");
-		String dateString = aFormat.format(aDate);
+		final SimpleDateFormat aFormat = new SimpleDateFormat("yyyyMMdd");
+		final String dateString = aFormat.format(aDate);
 
 		String aString = System.getProperty("user.home");
 		aString = aString + File.separator + "Desktop";
 		aString = aString + File.separator + "CSV2HTML_" + kindString + "_" + dateString;
-		File aDirectory = new File(aString);
+		final File aDirectory = new File(aString);
 		// ページのためのディレクトリが存在するならば消去しておく。
 		if (aDirectory.exists()) { IO.deleteFileOrDirectory(aDirectory); }
 		aDirectory.mkdirs();
@@ -129,10 +129,10 @@ abstract class Attributes extends Object
 	 * @param aString キー
 	 * @return インデックス
 	 */
-	protected int indexOf(String aString)
+	protected int indexOf(final String aString)
 	{
 		int index = 0;
-		for (String aKey : this.keys)
+		for (final String aKey : this.keys)
 		{
 			if (aString.compareTo(aKey) == 0) { return index; }
 			index++;
@@ -209,7 +209,7 @@ abstract class Attributes extends Object
 	 * @param index インデックス
 	 * @return キー
 	 */
-	protected String keyAt(int index)
+	protected String keyAt(final int index)
 	{
 		return this.keys().get(index);
 	}
@@ -228,7 +228,7 @@ abstract class Attributes extends Object
 	 * @param index インデックス
 	 * @return 名前
 	 */
-	protected String nameAt(int index)
+	protected String nameAt(final int index)
 	{
 		return this.names().get(index);
 	}
@@ -246,9 +246,9 @@ abstract class Attributes extends Object
 	 * 名前群を設定する。
 	 * @param aCollection 名前群
 	 */
-	public void names(List<String> aCollection)
+	public void names(final List<String> aCollection)
 	{
-		List<String> aList = new ArrayList<String>();
+		final List<String> aList = new ArrayList<String>();
 		aCollection.forEach(aList::add);
 		this.names = aList;
 
@@ -276,8 +276,8 @@ abstract class Attributes extends Object
 	 */
 	public String toString()
 	{
-		StringBuffer aBuffer = new StringBuffer();
-		Class<?> aClass = this.getClass();
+		final StringBuffer aBuffer = new StringBuffer();
+		final Class<?> aClass = this.getClass();
 		aBuffer.append(aClass.getName());
 		aBuffer.append("[");
 		for (int index = 0; index < this.size(); index++)
