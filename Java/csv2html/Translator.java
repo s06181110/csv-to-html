@@ -1,14 +1,11 @@
 package csv2html;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
 import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * トランスレータ：CSVファイルをHTMLページへと変換するプログラム。
@@ -118,8 +115,8 @@ public class Translator extends Object
 			aDownloader.join();
 		} catch (final InterruptedException interruptedException) {
 			interruptedException.printStackTrace();
-        }
-
+		}
+		
 		// CSVに由来するテーブルをHTMLに由来するテーブルへと変換する。
 		System.out.println(this.inputTable);
 		this.translate();
@@ -168,9 +165,9 @@ public class Translator extends Object
 		final List<String> aList = new ArrayList<>();
 		Integer aInteger = 0;
 
-		for (final String str : this.inputTable.attributes().names()) {
+		for (final String aString : this.inputTable.attributes().names()) {
 			if (aInteger != this.inputTable.attributes().indexOfThumbnail()) {
-				aList.add(str);
+				aList.add(aString);
 				if (aInteger == this.inputTable.attributes().indexOfPeriod())
 				aList.add("在位日数");
 			}
@@ -201,6 +198,4 @@ public class Translator extends Object
 
 		return;
 	}
-
-	
 }

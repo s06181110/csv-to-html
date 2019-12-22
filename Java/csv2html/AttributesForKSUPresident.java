@@ -1,7 +1,5 @@
 package csv2html;
 
-import java.io.File;
-
 /**
  * 属性リスト：京都産業大学学長の情報テーブルを入出力する際の属性情報を記憶。
  */
@@ -63,7 +61,6 @@ public class AttributesForKSUPresident extends Attributes
 	public String csvUrl()
 	{
 		return this.baseUrl() + "KSUPresident.csv";
-		//return this.baseUrl() + "TokugawaShogunate2.csv";
 	}
 
 	/**
