@@ -166,3 +166,49 @@ class AttributesForTokugawaShogunate(Attributes):
 		"""ページのタイトル文字列を応答する。"""
 
 		return 'Tokugawa Shogunate'
+
+class AttributesForKSUPresidents(Attributes):
+	"""属性リスト：京都産業大学学長の情報テーブルを入出力する際の属性情報を記憶。"""
+
+	def __init__(self, kind_string):
+		"""入力用("input")または出力用("output")で属性リストを作成するコンストラクタ。"""
+
+		super(AttributesForKSUPresidents, self).__init__(kind_string)
+
+		if kind_string == 'input':
+			self._keys = ["no", "name", "kana", "period", "education", "image", "thumbnail"]
+		if kind_string == 'output':
+			self._keys = ["no", "name", "kana", "period", "days", "education", "image"]
+		self._names = [None] * len(self._keys)
+
+		return
+
+	@classmethod
+	def base_directory(the_class):
+		"""ベースとなるディレクトリ（ページを生成するためのフォルダ）を応答する。"""
+
+		return super(AttributesForKSUPresidents, the_class).base_directory('KSUPresident')
+
+	@classmethod
+	def base_url(the_class):
+		"""CSVファイルの在り処をURLで応答する。"""
+
+		return 'https://s06181110.github.io/csv-to-html/Designs/KSUPresident/'
+
+	@classmethod
+	def caption_string(the_class):
+		"""ページの題目文字列を応答する。"""
+
+		return '京都産業大学学長'
+
+	@classmethod
+	def csv_url(the_class):
+		"""CSVファイルをURLで応答する。"""
+
+		return the_class.base_url() + 'KSUPresident.csv'
+
+	@classmethod
+	def title_string(the_class):
+		"""ページのタイトル文字列を応答する。"""
+
+		return 'KSU Presidents'
