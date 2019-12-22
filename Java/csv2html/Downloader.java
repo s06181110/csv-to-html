@@ -10,7 +10,6 @@ import utility.ImageUtility;
  */
 public class Downloader extends IO
 {
-
 	/**
 	 * ダウンローダのコンストラクタ。
 	 * @param aTable テーブル

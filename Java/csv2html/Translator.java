@@ -117,12 +117,10 @@ public class Translator extends Object
 			interruptedException.printStackTrace();
 		}
 		
-
 		// CSVに由来するテーブルをHTMLに由来するテーブルへと変換する。
 		System.out.println(this.inputTable);
 		this.translate();
 		System.out.println(this.outputTable);
-
 
 		// HTMLに由来するテーブルから書き出す。
 		final Writer aWriter = new Writer(this.outputTable);

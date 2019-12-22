@@ -67,13 +67,13 @@ public class Reader extends IO
 		.map(aString -> aString.replaceAll("\"", ""))
 		.map(replaceString -> Arrays.asList(replaceString.split(",", -1)))
 		.forEach(anotherList -> {
-		    if (aBoolean[0]) {
-		        aTable.attributes().names(anotherList);
-		        aBoolean[0] = false;
-		        return;
-		    }
-		    final Tuple aTuple = new Tuple(aTable.attributes(), anotherList);
-		    aTable.add(aTuple);
+			if (aBoolean[0]) {
+				aTable.attributes().names(anotherList);
+				aBoolean[0] = false;
+				return;
+			}
+			final Tuple aTuple = new Tuple(aTable.attributes(), anotherList);
+			aTable.add(aTuple);
 		});
 
 		return;
