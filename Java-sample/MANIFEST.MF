@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Ant-Version: Apache Ant 1.10.7
-Created-By: 13-ea+33 (Oracle Corporation)
-Main-Class: primeministers.Example
-
