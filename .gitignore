@@ -1,6 +1,9 @@
 # macのアレ
 .DS_Store
 
+# pyenv使ってる人用
+.python-version
+
 # みんなのエディタで生成される設定ファイルを除外
 .vscode
 .idea
