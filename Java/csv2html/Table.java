@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.imageio.ImageIO;
 
 /**
@@ -106,7 +105,6 @@ public class Table extends Object
 		final List<String> aList = IO.splitString(aString,"/");
 		final String aImagePath = this.attributes.baseDirectory() + aList.get(0) + File.separator + aList.get(1);
 		final File aFile = new File(aImagePath);
-		System.out.println(aImagePath);
 		BufferedImage bufferedImage = null;
 		try{
 			bufferedImage = ImageIO.read(aFile);

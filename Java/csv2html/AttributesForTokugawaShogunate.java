@@ -1,7 +1,5 @@
 package csv2html;
 
-import java.io.File;
-
 /**
  * 属性リスト：徳川幕府の情報テーブルを入出力する際の属性情報を記憶。
  */
@@ -62,8 +60,8 @@ public class AttributesForTokugawaShogunate extends Attributes
 	 */
 	public String csvUrl()
 	{
-		return this.baseUrl() + "TokugawaShogunate.csv";
-		// return this.baseUrl() + "TokugawaShogunate2.csv";
+		// return this.baseUrl() + "TokugawaShogunate.csv";
+		return this.baseUrl() + "TokugawaShogunate2.csv";
 	}
 
 	/**

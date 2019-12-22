@@ -32,7 +32,6 @@ abstract class Attributes extends Object
 	public Attributes()
 	{
 		super();
-
 		this.keys = new ArrayList<String>();
 		this.names = new ArrayList<String>();
 
