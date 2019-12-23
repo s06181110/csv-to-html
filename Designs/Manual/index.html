@@ -262,19 +262,19 @@ th {
 </ul>
 <div class="belt"><h3><a name="Setup">ダウンロード</a>（ファイルのダウンロード）</h3></div>
 <ol>
-<li><a href="../Program/PrimeMinistersByJava.zip">PrimeMnisterByJava.zip</a>のアーカイブファイルを適当な場所に展開する。<pre class="belt">
-$ unzip PrimeMinisterByJava.zip
+<li><a href="../../Zip/csv2htmlByJava.zip">csv2htmlByJava.zip</a>のアーカイブファイルを適当な場所に展開する。<pre class="belt">
+$ unzip csv2htmlByJava.zip
 </pre></li>
-<li><a href="../Program/PrimeMinistersByPython.zip">PrimeMnisterByPython.zip</a>のアーカイブファイルを適当な場所に展開する。<pre class="belt">
-$ unzip PrimeMinisterByJava.zip
+<li><a href="../../Zip/csv2htmlByPython.zip">csv2htmlByPython.zip</a>のアーカイブファイルを適当な場所に展開する。<pre class="belt">
+$ unzip csv2htmlByPython.zip
 </pre></div></li>
 </ol>
 <div class="belt"><h3><a name="Install_Java">インストール 〜Java〜 </a>(実行ファイルの作り方)</h3></div>
 <ol>
-<li>展開して得られる「PrimeMinisterByJava」ディレクトリへ移動。<pre class="belt">
-$ cd PrimeMinisterByJava
+<li>展開して得られる「csv2htmlByJava.zip」ディレクトリへ移動。<pre class="belt">
+$ cd csv2htmlByJava.zip
 </pre></li>
-<li>「PrimeMinisterByJava」ディレクトリの中身を確認する。<pre class="belt">
+<li>「csv2htmlByJava.zip」ディレクトリの中身を確認する。<pre class="belt">
 $ ls -l
 total 56
 drwxr-xr-x   3 g-------  staff     96 12 18 03:06 CSV2HTML.app
@@ -288,19 +288,19 @@ drwxr-xr-x  14 g-------  staff    448 12 22 15:17 csv2html
 $ make 
 env LC_ALL=ja_JP.UTF-8 ant all
 Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
-Buildfile: /Users/g-------/Program/csv-to-html/Java/build.xml
+Buildfile: /Users/g-------/Program/csv-to-html/csv2htmlByJava/build.xml
 
 prepare:
-    [mkdir] Created dir: /Users/g-------/Program/csv-to-html/Java/Classes
+    [mkdir] Created dir: /Users/g-------/Program/csv-to-html/csv2htmlByJava/Classes
      [exec] 2019年 12月23日 月曜日 01時45分46秒 JST
 
 compile:
-    [javac] Compiling 12 source files to /Users/g-------/Program/csv-to-html/Java/Classes
+    [javac] Compiling 12 source files to /Users/g-------/Program/csv-to-html/csv2htmlByJava/Classes
     [javac] Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
      [exec] 2019年 12月23日 月曜日 01時45分47秒 JST
 
 jar:
-      [jar] Building jar: /Users/g-------/Program/csv-to-html/Java/csv2html.jar
+      [jar] Building jar: /Users/g-------/Program/csv-to-html/csv2htmlByJava/csv2html.jar
      [exec] 2019年 12月23日 月曜日 01時45分48秒 JST
 
 all:
@@ -309,7 +309,7 @@ all:
 BUILD SUCCESSFUL
 Total time: 2 seconds
 </pre></li>
-<li>「PrimeMinister.jar」の生成を確認する。<pre class="belt">
+<li>「csv2html.jar」の生成を確認する。<pre class="belt">
 $ ls -l
 total 128
 drwxr-xr-x   3 g-------  staff     96 12 18 03:06 CSV2HTML.app
@@ -321,11 +321,11 @@ drwxr-xr-x  14 g-------  staff    448 12 22 15:17 csv2html
 -rw-r--r--   1 g-------  staff     51 12 18 03:06 csv2html.mf
 -rw-r--r--   1 g-------  staff  14342 12 18 03:06 utility.jar
 </pre></li>
-<li>「make install」を実行し、アプリケーションファイル「」を作成する。<pre class="belt">
+<li>「make install」を実行し、アプリケーションファイル「CSV2HTML.app」を作成する。<pre class="belt">
 $ make install
 env LC_ALL=ja_JP.UTF-8 ant install
 Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
-Buildfile: /Users/g-------/Program/csv-to-html/Java/build.xml
+Buildfile: /Users/g-------/Program/csv-to-html/csv2htmlByJava/build.xml
 
 prepare:
      [exec] 2019年 12月23日 月曜日 01時54分48秒 JST
@@ -340,7 +340,7 @@ all:
      [exec] 2019年 12月23日 月曜日 01時54分48秒 JST
 
 install:
-     [copy] Copying 1 file to /Users/g-------/Program/csv-to-html/Java/CSV2HTML.app/Contents/Resources/Java
+     [copy] Copying 1 file to /Users/g-------/Program/csv-to-html/csv2htmlByJava/CSV2HTML.app/Contents/Resources/Java
      [exec] 2019年 12月23日 月曜日 01時54分48秒 JST
 
 BUILD SUCCESSFUL
@@ -349,11 +349,11 @@ Total time: 0 seconds
 </ol>
 <div class="belt"><h3><a name="Install_Python">インストール 〜Python〜 </a>(実行ファイルの作り方)</h3></div>
 <ol>
-<li>展開して得られる「PrimeMinisterByPyhotn」ディレクトリへ移動。<pre class="belt">
-$ cd PrimeMinisterByPython
+<li>展開して得られる「csv2htmlByPyhotn」ディレクトリへ移動。<pre class="belt">
+$ cd csv2htmlByPython
 </pre></li>
-<li>「PrimeMinisterByPython」ディレクトリの中身を確認する。<pre class="belt">
-  ls -l
+<li>「csv2htmlByPython」ディレクトリの中身を確認する。<pre class="belt">
+ls -l
 total 48
 drwxr-xr-x   3 g-------  staff    96 12 18 03:06 CSV2HTML.app
 -rw-r--r--   1 g-------  staff   118 12 18 03:06 MANIFEST.in
@@ -369,7 +369,7 @@ Password:
 Requirement already up-to-date: pip in /Users/g-------/.pyenv/versions/3.7.5/lib/python3.7/site-packages (19.3.1)
 Requirement already up-to-date: Pillow in /Users/g-------/.pyenv/versions/3.7.5/lib/python3.7/site-packages (6.2.1)
 </pre></li>
-<li>「make install」を実行し、アプリケーションファイル「」を作成する。<pre class="belt">
+<li>「make install」を実行し、アプリケーションファイル「CSV2HTML.app」を作成する。<pre class="belt">
 make install
 mkdir CSV2HTML.app/Contents/Resources/Python/
 cp -p -r csv2html.py csv2html CSV2HTML.app/Contents/Resources/Python/
@@ -381,7 +381,7 @@ cp -p -r csv2html.py csv2html CSV2HTML.app/Contents/Resources/Python/
 $ make test
 env LC_ALL=ja_JP.UTF-8 ant all
 Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
-Buildfile: /Users/g-------/Program/csv-to-html/Java/build.xml
+Buildfile: /Users/g-------/Program/csv-to-html/csv2htmlByJava/build.xml
 
 prepare:
      [exec] 2019年 12月23日 月曜日 02時38分53秒 JST
@@ -399,7 +399,7 @@ BUILD SUCCESSFUL
 Total time: 0 seconds
 env LC_ALL=ja_JP.UTF-8 ant test
 Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
-Buildfile: /Users/g-------/Program/csv-to-html/Java/build.xml
+Buildfile: /Users/g-------/Program/csv-to-html/csv2htmlByJava/build.xml
 
 prepare:
      [exec] 2019年 12月23日 月曜日 02時38分54秒 JST
@@ -453,9 +453,9 @@ To: /Users/g-------/Desktop/CSV2HTML_PrimeMinisters_20191223/images/040.jpg
 <img>
 もしくは、「open」コマンドを用いて起動することもできる。
 <pre class="belt">
-$ open PrimeMinister.app
+$ open CSV2HTML.app
 </pre></li>
-<p>実行例を以下に示す。アプリケーションは「PrimeMinisterByJava」、「PrimeMinisterByPyhotn」ディレクトリ内にで作成される。今回はわかりやすいようにデスクトップに移動させておく。</p>
+<p>実行例を以下に示す。アプリケーションは「csv2htmlByJava」、「csv2htmlByPyhotn」ディレクトリ内にで作成される。今回はわかりやすいようにデスクトップに移動させておく。</p>
 <pre class="belt-aquamarine">
 あああああ
 </pre>
