@@ -2,17 +2,17 @@ package csv2html;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import utility.StringUtility;
-
 import java.io.UnsupportedEncodingException;
 
 /**
  * 入出力：リーダ・ダウンローダ・ライタを抽象する。
  */
-public abstract class IO extends Object
+public abstract class IO extends Thread
 {
 	/**
 	 * テーブル（表：スプレッドシート）を記憶するフィールド。
@@ -20,13 +20,17 @@ public abstract class IO extends Object
 	private Table table;
 
 	/**
+	 * ローカルのCSVファイルの在り処を記憶するフィールド。
+	 */
+	private static String csvFilePath;
+
+	/**
 	 * 入出力のコンストラクタ。
 	 * @param aTable テーブル
 	 */
-	public IO(Table aTable)
+	public IO(final Table aTable)
 	{
 		super();
-
 		this.table = aTable;
 
 		return;
@@ -45,14 +49,14 @@ public abstract class IO extends Object
 	 * ファイルやディレクトリを削除するクラスメソッド。
 	 * @param aFile ファイルやディレクトリ
 	 */
-	public static void deleteFileOrDirectory(File aFile)
+	public static void deleteFileOrDirectory(final File aFile)
 	{
 		if (!aFile.exists()) { return; }
 		if (aFile.isFile()) { aFile.delete(); }
 		if (aFile.isDirectory())
 		{
-			File[] files = aFile.listFiles();
-			for (File each : files) { IO.deleteFileOrDirectory(each); }
+			final List<File> Files = Arrays.asList(aFile.listFiles());
+			Files.forEach(IO::deleteFileOrDirectory);
 			aFile.delete();
 		}
 
@@ -67,9 +71,9 @@ public abstract class IO extends Object
 	public static String htmlCanonicalString(String aString)
 	{
 		try {
-			byte[] buff = aString.getBytes("UTF-8");    
+			final byte[] buff = aString.getBytes("UTF-8");    
 			aString =  new String(buff, "UTF-8");
-		} catch (UnsupportedEncodingException unsupportedEncodingException){
+		} catch (final UnsupportedEncodingException unsupportedEncodingException){
 			unsupportedEncodingException.printStackTrace();
 		}
 		return aString;
@@ -81,7 +85,7 @@ public abstract class IO extends Object
 	 * @param aFile ファイル
 	 * @return 行リスト
 	 */
-	public static List<String> readTextFromFile(File aFile)
+	public static List<String> readTextFromFile(final File aFile)
 	{
 		return StringUtility.readTextFromFile(aFile);
 	}
@@ -91,7 +95,7 @@ public abstract class IO extends Object
 	 * @param fileString ファイル文字列
 	 * @return 行リスト
 	 */
-	public static List<String> readTextFromFile(String fileString)
+	public static List<String> readTextFromFile(final String fileString)
 	{
 		return StringUtility.readTextFromFile(fileString);
 	}
@@ -101,9 +105,9 @@ public abstract class IO extends Object
 	 * @param urlString URL文字列
 	 * @return 行リスト
 	 */
-	public static List<String> readTextFromURL(String urlString)
+	public static List<String> readTextFromURL(final String urlString)
 	{
-		return StringUtility.readTextFromURL(urlString);
+		return StringUtility.readTextFromURL(urlString) ;
 	}
 
 	/**
@@ -111,7 +115,7 @@ public abstract class IO extends Object
 	 * @param aURL URL
 	 * @return 行リスト
 	 */
-	public static List<String> readTextFromURL(URL aURL)
+	public static List<String> readTextFromURL(final URL aURL)
 	{
 		return StringUtility.readTextFromURL(aURL);
 	}
@@ -122,7 +126,7 @@ public abstract class IO extends Object
 	 * @param separators セパレータ文字列
 	 * @return トークン列
 	 */
-	public static List<String> splitString(String string, String separators)
+	public static List<String> splitString(final String string, final String separators)
 	{
 		return StringUtility.splitString(string, separators);
 	}
@@ -150,7 +154,7 @@ public abstract class IO extends Object
 	 * @param aCollection 行リスト
 	 * @param aFile ファイル
 	 */
-	public static void writeText(List<String> aCollection, File aFile)
+	public static void writeText(final List<String> aCollection, final File aFile)
 	{
 		StringUtility.writeText(aCollection, aFile);
 
@@ -162,10 +166,31 @@ public abstract class IO extends Object
 	 * @param aCollection 行リスト
 	 * @param fileString ファイル名
 	 */
-	public static void writeText(List<String> aCollection, String fileString)
+	public static void writeText(final List<String> aCollection, final String fileString)
 	{
 		StringUtility.writeText(aCollection, fileString);
 
 		return;
 	}
+
+	/**
+	 * ローカルのCSVファイルの在り処を入力する。
+	 * @param aString ローカルのCSVファイルの在り処
+	 */
+	public void setCsvFilePath(final String aString)
+	{
+		IO.csvFilePath = aString;
+
+		return;
+	}
+
+	/**
+	 * ローカルのCSVファイルの在り処を応答する。
+	 * @return ローカルのCSVファイルの在り処
+	 */
+	public String getCsvFilePath()
+	{
+		return IO.csvFilePath;
+	}
+
 }

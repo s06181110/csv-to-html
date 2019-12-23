@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from attributes import AttributesForPrimeMinisters
-from attributes import AttributesForTokugawaShogunate
-from translator import Translator
+from csv2html.attributes import AttributesForPrimeMinisters, AttributesForTokugawaShogunate, AttributesForKSUPresidents
+from csv2html.translator import Translator
 
 class Example(object):
 	"""例題プログラム：CSVファイルをHTMLページへと変換する。"""
@@ -15,6 +14,7 @@ class Example(object):
 		classes = []
 		classes.append(AttributesForPrimeMinisters)
 		classes.append(AttributesForTokugawaShogunate)
+		classes.append(AttributesForKSUPresidents)
 
 		for class_attributes in classes:
 			Translator.perform(class_attributes)

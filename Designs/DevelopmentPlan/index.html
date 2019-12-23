@@ -5,9 +5,9 @@
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta name="keywords" content="Aoki,Atsushi,Smalltalk,Smalltalker,Program,Programmer,Object,Oriented,Programming">
-<meta name="description" content="プログラミング言語「総理大臣ページ生成」">
-<meta name="author" content="AOKI Atsushi">
-<link rev="made" href="mailto:atsushi@cc.kyoto-su.ac.jp">
+<meta name="description" content="プログラミング言語「CSV2HTML」">
+<meta name="author" content="AOKI Atsushi, IKEDA Keisuke, ENOMOTO Yoshiki, SHIZUNO Tomoya, TSUJI Karin and FUKUI Kosuke">
+<link rev="made" href="mailto:秘密ダヨ❤️">
 <link rel="index" href="index-j.html">
 <style type="text/css">
 <!--
@@ -229,7 +229,7 @@ th {
 }
 -->
 </style>
-<title>プログラミング言語「総理大臣ページ生成」開発計画書</title>
+<title>プログラミング言語「CSV2HTML」開発計画書</title>
 </head>
 <body>
 <div id="menu">
@@ -247,11 +247,179 @@ th {
 </ul>
 </div>
 <hr>
-<h2>プログラミング言語「総理大臣ページ生成」開発計画書</h2>
+<h2>プログラミング言語「CSV2HTML」開発計画書</h2>
+<ul>
+  <li><a href="#DP01">開発体制（全体）</a></li>
+  <li><a href="#DP02">開発体制（Java）</a></li>
+  <li><a href="#DP03">開発体制（Python）</a></li>
+  <li><a href="#DP04">開発スケジュール</a></li>
+</ul>
 <div class="belt">
-<h3><a name="KanseiSaseteKudasai">完成させてください</a>（ガントチャートが必要）</h3>
+<h3><a name="DP01">開発体制（全体）</a></h3>
 </div>
+<p>開発に関わるメンバの一覧と開発予定コンポーネント（部品＝クラス）の担当者を以下に示す。</p>
+<table summary="table">
+  <tbody>
+    <tr>
+      <td>
+      <table class="content" summary="table">
+        <tbody>
+          <tr>
+            <td align="right">プロジェクトマネージャ：</td>
+            <td align="left">志津野 智哉</td>
+          </tr>
+          <tr>
+            <td align="right">デザイナ：</td>
+            <td align="left">志津野 智哉</td>
+          </tr>
+          <tr>
+            <td align="right">プログラマ：</td>
+            <td align="left">池田 敬祐、榎本 啓希、志津野 智哉、辻 花鈴、福井 康介</td>
+          <tr>
+            <td align="right">テスタ：</td>
+            <td align="left">全員</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="belt">
+<h3><a name="DP02">開発体制（Java）</a></h3>
+</div>
+<table summary="table">
+  <tbody>
+    <tr>
+      <td>
+      <table class="content" summary="table">
+        <tbody>
+          <tr>
+            <td align="right">Attributes担当：</td>
+            <td align="left">池田 敬祐、榎本 啓希</td>
+          </tr>
+          <tr>
+            <td align="right">AttributesForPrimeMinisters担当：</td>
+            <td align="left">池田 敬祐、榎本 啓希</td>
+          </tr>
+          <tr>
+            <td align="right">AttributesForTokugawaShogunate担当：</td>
+            <td align="left">池田 敬祐、榎本 啓希</td>
+          </tr>
+          <tr>
+            <td align="right">AttributesForKSUPresident担当：</td>
+            <td align="left">池田 敬祐</td>
+          </tr>
+          <tr>
+            <td align="right">Downloader担当：</td>
+            <td align="left">池田 敬祐、榎本 啓希、志津野 智哉</td>
+          </tr>
+	        <tr>
+            <td align="right">Example担当：</td>
+            <td align="left">池田 敬祐、榎本 啓希</td>
+          </tr>
+          <tr>
+            <td align="right">IO担当：</td>
+            <td align="left">池田 敬祐</td>
+          </tr>
+          <tr>
+            <td align="right">Reader担当：</td>
+            <td align="left">池田 敬祐</td>
+          </tr>
+          <tr>
+            <td align="right">Table担当：</td>
+            <td align="left">池田 敬祐、辻 花鈴</td>
+          </tr>
+          <tr>
+            <td align="right">Translator担当：</td>
+            <td align="left">池田 敬祐、志津野 智哉</td>
+          </tr>
+          <tr>
+            <td align="right">Tuple担当：</td>
+            <td align="left">池田 敬祐、辻 花鈴</td>
+          </tr>
+          <tr>
+            <td align="right">Writer担当：</td>
+            <td align="left">池田 敬祐、志津野 智哉</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="belt">
+<h3><a name="DP03">開発体制（Python）</a></h3>
+</div>
+<table summary="table">
+  <tbody>
+    <tr>
+      <td>
+      <table class="content" summary="table">
+        <tbody>
+          <tr>
+            <td align="right">attributes担当：</td>
+            <td align="left">榎本 啓希、志津野 智哉</td>
+          </tr>
+          <tr>
+            <td align="right">downloader担当：</td>
+            <td align="left">榎本 啓希、志津野 智哉</td>
+          </tr>
+	        <tr>
+            <td align="right">example担当：</td>
+            <td align="left">榎本 啓希、志津野 智哉</td>
+          </tr>
+          <tr>
+            <td align="right">io担当：</td>
+            <td align="left">榎本 啓希、志津野 智哉、福井 康介</td>
+          </tr>
+          <tr>
+            <td align="right">reader担当：</td>
+            <td align="left">池田 敬祐、榎本 啓希、志津野 智哉、福井 康介</td>
+          </tr>
+          <tr>
+            <td align="right">table担当：</td>
+            <td align="left">榎本 啓希、志津野 智哉</td>
+          </tr>
+          <tr>
+            <td align="right">translator担当：</td>
+            <td align="left">榎本 啓希、志津野 智哉、福井 康介</td>
+          </tr>
+          <tr>
+            <td align="right">tuple担当：</td>
+            <td align="left">榎本 啓希、志津野 智哉</td>
+          </tr>
+          <tr>
+            <td align="right">writer担当：</td>
+            <td align="left">池田 敬祐、志津野 智哉</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="belt">
+<h3><a name="DP04">開発スケジュール</a></h3>
+</div>
+<p>以下に開発スケジュールを記す。</p>
+<table summary="table">
+  <tbody>
+    <tr>
+      <td>
+      <table class="content" summary="table">
+        <tbody>
+          <tr>
+            <td class="center-small"><a href="images/DP01.png"><img class="borderless" src="images/DP01.png" width="600" height="100" alt="DP01"></a></td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <hr>
-<div class="right-small">Copyright 20xx Project xx, Updated: 2016/11/30 (Created: 2009/11/11)</div>
+<div class="right-small">Copyright 2019 Project aokiken extends AOK, Updated: 2019/12/24 (Created: 2009/11/11)</div>
 </body>
 </html>
