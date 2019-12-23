@@ -61,7 +61,7 @@ public class Downloader extends IO
 
 	/**
 	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする時のログを出力する。
-	 * @param 各タプルの画像の属性
+	 * @param aString 各タプルの画像の属性
 	 */
 	public void downloadPicturesLog(String aString){
 		final String anotherString = super.attributes().baseUrl() + aString;
