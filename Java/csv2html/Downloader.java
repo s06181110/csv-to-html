@@ -29,8 +29,10 @@ public class Downloader extends IO
 		System.out.println("From: " + super.attributes().csvUrl());
 		final List<String> aList = IO.readTextFromURL(super.attributes().csvUrl());
 		System.out.println("To: " + super.attributes().baseDirectory());
-		final String aString = super.attributes().baseDirectory() + File.separator + "csv" + File.separator + "'" + super.attributes().titleString() + "'" + ".csv";
-		IO.writeText(aList, aString);
+		super.setCsvFilePath(super.attributes().baseDirectory() + "csv" + File.separator + super.attributes().titleString() + ".csv");
+		IO.writeText(aList, super.getCsvFilePath());
+
+		return;
 	}
 
 	/**
@@ -53,13 +55,13 @@ public class Downloader extends IO
 		super.tuples().stream()
 		.map(aTuple -> aTuple.values().get(indexOfPicture))
 		.forEach(this::downloadPicturesLog);
-			
+
 		return;
 	}
 
 	/**
 	 * 総理大臣の画像群またはサムネイル画像群をダウンロードする時のログを出力する。
-	 * @param 各タプルの画像の属性
+	 * @param aString 各タプルの画像の属性
 	 */
 	public void downloadPicturesLog(String aString){
 		final String anotherString = super.attributes().baseUrl() + aString;
@@ -86,15 +88,15 @@ public class Downloader extends IO
 	 */
 	public synchronized void run()
 	{
+		this.makeAssetDir("csv");
+		this.makeAssetDir("images");
+		this.makeAssetDir("thumbnails");
+		this.downloadCSV();
 		final Reader aReader = new Reader(super.table());
 		aReader.start();
 		try {
             aReader.join();
 		} catch (final InterruptedException interruptedException) { interruptedException.printStackTrace(); }
-		this.makeAssetDir("csv");
-		this.makeAssetDir("images");
-		this.makeAssetDir("thumbnails");
-		this.downloadCSV();
 		this.downloadImages();
 		this.downloadThumbnails();
 

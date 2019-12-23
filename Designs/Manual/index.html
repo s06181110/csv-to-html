@@ -75,6 +75,10 @@ pre.belt-yellow {
   background-color : #ffffcc;
   padding : 4px 8px;
 }
+pre.belt-aquamarine {
+  background-color : #7fffd4;
+  padding : 0px 4px;
+}
 table {
   border-style : solid;
   border-width : 0px;
@@ -248,10 +252,246 @@ th {
 </div>
 <hr>
 <h2>プログラミング言語「CSV2HTML」マニュアル</h2>
-<div class="belt">
-<h3><a name="KanseiSaseteKudasai">完成させてください</a></h3>
-</div>
+<ul>
+  <li><a href="#Setup">ダウンロード（ファイルのダウンロード）</a></li>
+  <li><a href="#Install_Java">インストール 〜Java〜 （実行ファイルの作り方）</a></li>
+  <li><a href="#Install_Python">インストール 〜Python〜 （実行ファイルの作り方）</a></li>
+  <li><a href="#Execution_Java">実行方法 〜Java〜 （実行ファイルの起動方法）</a></li>
+  <li><a href="#Execution_Python">実行方法 〜Python〜 （実行ファイルの起動方法）</a></li>
+  <li><a href="#Execution_Application">実行方法 〜Application〜 （アプリケーションの起動方法）</a></li>
+</ul>
+<div class="belt"><h3><a name="Setup">ダウンロード</a>（ファイルのダウンロード）</h3></div>
+<ol>
+<li><a href="../../Zip/csv2htmlByJava.zip">csv2htmlByJava.zip</a>のアーカイブファイルを適当な場所に展開する。<pre class="belt">
+$ unzip csv2htmlByJava.zip
+</pre></li>
+<li><a href="../../Zip/csv2htmlByPython.zip">csv2htmlByPython.zip</a>のアーカイブファイルを適当な場所に展開する。<pre class="belt">
+$ unzip csv2htmlByPython.zip
+</pre></div></li>
+</ol>
+<div class="belt"><h3><a name="Install_Java">インストール 〜Java〜 </a>(実行ファイルの作り方)</h3></div>
+<ol>
+<li>展開して得られる「csv2htmlByJava.zip」ディレクトリへ移動。<pre class="belt">
+$ cd csv2htmlByJava.zip
+</pre></li>
+<li>「csv2htmlByJava.zip」ディレクトリの中身を確認する。<pre class="belt">
+$ ls -l
+total 56
+drwxr-xr-x   3 g-------  staff     96 12 18 03:06 CSV2HTML.app
+-rw-r--r--   1 g-------  staff    256 12 18 03:06 Makefile
+-rw-r--r--   1 g-------  staff   3621 12 18 03:06 build.xml
+drwxr-xr-x  14 g-------  staff    448 12 22 15:17 csv2html
+-rw-r--r--   1 g-------  staff     51 12 18 03:06 csv2html.mf
+-rw-r--r--   1 g-------  staff  14342 12 18 03:06 utility.jar
+</pre></li>
+<li>「make」を実行する。<pre class="belt">
+$ make 
+env LC_ALL=ja_JP.UTF-8 ant all
+Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
+Buildfile: /Users/g-------/Program/csv-to-html/csv2htmlByJava/build.xml
+
+prepare:
+    [mkdir] Created dir: /Users/g-------/Program/csv-to-html/csv2htmlByJava/Classes
+     [exec] 2019年 12月23日 月曜日 01時45分46秒 JST
+
+compile:
+    [javac] Compiling 12 source files to /Users/g-------/Program/csv-to-html/csv2htmlByJava/Classes
+    [javac] Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
+     [exec] 2019年 12月23日 月曜日 01時45分47秒 JST
+
+jar:
+      [jar] Building jar: /Users/g-------/Program/csv-to-html/csv2htmlByJava/csv2html.jar
+     [exec] 2019年 12月23日 月曜日 01時45分48秒 JST
+
+all:
+     [exec] 2019年 12月23日 月曜日 01時45分48秒 JST
+
+BUILD SUCCESSFUL
+Total time: 2 seconds
+</pre></li>
+<li>「csv2html.jar」の生成を確認する。<pre class="belt">
+$ ls -l
+total 128
+drwxr-xr-x   3 g-------  staff     96 12 18 03:06 CSV2HTML.app
+drwxr-xr-x   3 g-------  staff     96 12 23 01:45 Classes
+-rw-r--r--   1 g-------  staff    256 12 18 03:06 Makefile
+-rw-r--r--   1 g-------  staff   3621 12 18 03:06 build.xml
+drwxr-xr-x  14 g-------  staff    448 12 22 15:17 csv2html
+-rw-r--r--   1 g-------  staff  35595 12 23 01:45 csv2html.jar
+-rw-r--r--   1 g-------  staff     51 12 18 03:06 csv2html.mf
+-rw-r--r--   1 g-------  staff  14342 12 18 03:06 utility.jar
+</pre></li>
+<li>「make install」を実行し、アプリケーションファイル「CSV2HTML.app」を作成する。<pre class="belt">
+$ make install
+env LC_ALL=ja_JP.UTF-8 ant install
+Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
+Buildfile: /Users/g-------/Program/csv-to-html/csv2htmlByJava/build.xml
+
+prepare:
+     [exec] 2019年 12月23日 月曜日 01時54分48秒 JST
+
+compile:
+     [exec] 2019年 12月23日 月曜日 01時54分48秒 JST
+
+jar:
+     [exec] 2019年 12月23日 月曜日 01時54分48秒 JST
+
+all:
+     [exec] 2019年 12月23日 月曜日 01時54分48秒 JST
+
+install:
+     [copy] Copying 1 file to /Users/g-------/Program/csv-to-html/csv2htmlByJava/CSV2HTML.app/Contents/Resources/Java
+     [exec] 2019年 12月23日 月曜日 01時54分48秒 JST
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+</pre></li>
+</ol>
+<div class="belt"><h3><a name="Install_Python">インストール 〜Python〜 </a>(実行ファイルの作り方)</h3></div>
+<ol>
+<li>展開して得られる「csv2htmlByPyhotn」ディレクトリへ移動。<pre class="belt">
+$ cd csv2htmlByPython
+</pre></li>
+<li>「csv2htmlByPython」ディレクトリの中身を確認する。<pre class="belt">
+ls -l
+total 48
+drwxr-xr-x   3 g-------  staff    96 12 18 03:06 CSV2HTML.app
+-rw-r--r--   1 g-------  staff   118 12 18 03:06 MANIFEST.in
+-rw-r--r--   1 g-------  staff  1719 12 18 03:06 Makefile
+-rw-r--r--   1 g-------  staff  4430 12 18 03:06 README.txt
+drwxr-xr-x  13 g-------  staff   416 12 23 02:06 csv2html
+-rw-r--r--   1 g-------  staff   177 12 18 03:06 csv2html.py
+-rw-r--r--   1 g-------  staff   737 12 18 03:06 setup.py
+</pre></li>
+<li>「make prepare」を実行し、プログラム実行のための準備を行う。<pre class="belt">
+$ make prepare
+Password:
+Requirement already up-to-date: pip in /Users/g-------/.pyenv/versions/3.7.5/lib/python3.7/site-packages (19.3.1)
+Requirement already up-to-date: Pillow in /Users/g-------/.pyenv/versions/3.7.5/lib/python3.7/site-packages (6.2.1)
+</pre></li>
+<li>「make install」を実行し、アプリケーションファイル「CSV2HTML.app」を作成する。<pre class="belt">
+make install
+mkdir CSV2HTML.app/Contents/Resources/Python/
+cp -p -r csv2html.py csv2html CSV2HTML.app/Contents/Resources/Python/
+</pre></li>
+</ol>
+<div class="belt"><h3><a name="Execution_Java">実行方法 〜Java〜 </a>（実行ファイルの起動方法）</h3></div>
+<ol>
+<li>「make test」を実行する。<pre class="belt">
+$ make test
+env LC_ALL=ja_JP.UTF-8 ant all
+Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
+Buildfile: /Users/g-------/Program/csv-to-html/csv2htmlByJava/build.xml
+
+prepare:
+     [exec] 2019年 12月23日 月曜日 02時38分53秒 JST
+
+compile:
+     [exec] 2019年 12月23日 月曜日 02時38分53秒 JST
+
+jar:
+     [exec] 2019年 12月23日 月曜日 02時38分53秒 JST
+
+all:
+     [exec] 2019年 12月23日 月曜日 02時38分53秒 JST
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+env LC_ALL=ja_JP.UTF-8 ant test
+Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
+Buildfile: /Users/g-------/Program/csv-to-html/csv2htmlByJava/build.xml
+
+prepare:
+     [exec] 2019年 12月23日 月曜日 02時38分54秒 JST
+
+compile:
+     [exec] 2019年 12月23日 月曜日 02時38分54秒 JST
+
+jar:
+     [exec] 2019年 12月23日 月曜日 02時38分54秒 JST
+
+all:
+     [exec] 2019年 12月23日 月曜日 02時38分54秒 JST
+
+test:
+     [exec] Picked up _JAVA_OPTIONS: -Dfile.encoding=UTF-8
+     [exec] From: http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/VisualWorks/CSV2HTML/PrimeMinisters/PrimeMinisters2.csv
+     [exec] To: /Users/g-------/Desktop/CSV2HTML_PrimeMinisters_20191223/
+     [exec] From: http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/VisualWorks/CSV2HTML/PrimeMinisters/images/039.jpg
+     [exec] To: /Users/g-------/Desktop/CSV2HTML_PrimeMinisters_20191223/images/039.jpg
+     [exec] From: http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/VisualWorks/CSV2HTML/PrimeMinisters/images/040.jpg
+
+8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------
+
+     [exec] 2019年 12月23日 月曜日 02時39分05秒 JST
+
+BUILD SUCCESSFUL
+Total time: 11 seconds
+
+</pre></li>
+</ol>
+<div class="belt"><h3><a name="Execution_Python">実行方法 〜Python〜 </a>（実行ファイルの起動方法）</h3></div>
+<ol>
+<li>「make test」を実行する。<pre class="belt">
+$ make test
+python csv2html.py
+From: http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/VisualWorks/CSV2HTML/PrimeMinisters/PrimeMinisters2.csv
+To: /Users/g-------/Desktop/CSV2HTML_PrimeMinisters_20191223/PrimeMinisters2.csv
+From: http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/VisualWorks/CSV2HTML/PrimeMinisters/images/039.jpg
+To: /Users/g-------/Desktop/CSV2HTML_PrimeMinisters_20191223/images/039.jpg
+From: http://www.cc.kyoto-su.ac.jp/~atsushi/Programs/VisualWorks/CSV2HTML/PrimeMinisters/images/040.jpg
+To: /Users/g-------/Desktop/CSV2HTML_PrimeMinisters_20191223/images/040.jpg
+
+8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------8<---------
+
+/Users/g-------/Desktop/CSV2HTML_KSUPresident_20191223/index.html
+</pre></li>
+</ol>
+<div class="belt"><h3><a name="Execution_Application">実行方法 〜Application〜 </a>（アプリケーションの起動方法）</h3></div>
+<ol>
+<li>MacOSの場合は「<a href="#Install_Java">インストール 〜Java〜 (実行ファイルの作り方)</a>」もしくは「<a href="#Install_Python">インストール 〜Python〜 (実行ファイルの作り方)</a>」で作成したアプリケーション「CSV2HTML.app」ダブルクリックして実行できる。
+<img>
+もしくは、「open」コマンドを用いて起動することもできる。
+<pre class="belt">
+$ open CSV2HTML.app
+</pre></li>
+<p>実行例を以下に示す。アプリケーションは「csv2htmlByJava」、「csv2htmlByPyhotn」ディレクトリ内にで作成される。</p>
+<pre class="belt-aquamarine">
+
+  わかりやすいようにデスクトップに移動させておく。
+
+  <img class="borderless" src="images/M01.png" width="504" height="371" alt="M01">
+
+  次にアイコンをダブルクリックするとターミナルへの許可を求められる。許可して良い。
+
+  <img class="borderless" src="images/M02.png" width="504" alt="M02">
+
+  許可を行うとターミナルが起動し、プログラムが起動される。
+
+  <img class="borderless" src="images/M03.png" width="504" height="371" alt="M03">
+
+  プログラムの処理と同時にデスクトップに3つのディレクトリ（フォルダ）が生成される。
+
+  <img class="borderless" src="images/M04.png" width="504" height="371" alt="M04">
+
+  プログラムの処理と同時に「Safari.app」が起動し、生成したHTMLファイルを表示する。
+  まずは総理大臣ページ。
+
+  <img class="borderless" src="images/M05.png" width="504" height="371" alt="M05">
+
+  次は総ページ。
+
+  <img class="borderless" src="images/M06.png" width="504" height="371" alt="M06">
+
+  最後にこのページ。あれれっ？？このページはいったい・・・！？
+
+  <img class="borderless" src="images/M07.png" width="504" height="371" alt="M07">
+
+  以上で実例終了です。
+
+</pre>
+</ol>
 <hr>
-<div class="right-small">Copyright 2019 Project aokiken, Updated: 2019/12/21 (Created: 2009/11/11)</div>
+<div class="right-small">Copyright 2019 Project aokiken extends AOK, Updated: 2019/12/24 (Created: 2009/11/11)</div>
 </body>
 </html>

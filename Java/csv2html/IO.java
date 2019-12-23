@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import utility.StringUtility;
-
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -19,6 +18,11 @@ public abstract class IO extends Thread
 	 * テーブル（表：スプレッドシート）を記憶するフィールド。
 	 */
 	private Table table;
+
+	/**
+	 * ローカルのCSVファイルの在り処を記憶するフィールド。
+	 */
+	private static String csvFilePath;
 
 	/**
 	 * 入出力のコンストラクタ。
@@ -103,7 +107,7 @@ public abstract class IO extends Thread
 	 */
 	public static List<String> readTextFromURL(final String urlString)
 	{
-		return StringUtility.readTextFromURL(urlString);
+		return StringUtility.readTextFromURL(urlString) ;
 	}
 
 	/**
@@ -168,4 +172,25 @@ public abstract class IO extends Thread
 
 		return;
 	}
+
+	/**
+	 * ローカルのCSVファイルの在り処を入力する。
+	 * @param aString ローカルのCSVファイルの在り処
+	 */
+	public void setCsvFilePath(final String aString)
+	{
+		IO.csvFilePath = aString;
+
+		return;
+	}
+
+	/**
+	 * ローカルのCSVファイルの在り処を応答する。
+	 * @return ローカルのCSVファイルの在り処
+	 */
+	public String getCsvFilePath()
+	{
+		return IO.csvFilePath;
+	}
+
 }

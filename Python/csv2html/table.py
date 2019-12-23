@@ -42,7 +42,6 @@ class Table(object):
 		index = self.attributes().keys().index("image")
 		a_list = []
 		for each in self.tuples():
-			# print(each.values()[0])
 			a_list.append(each.values()[index])
 		return a_list
 
